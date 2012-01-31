@@ -1,0 +1,89 @@
+# ======================================================================
+# Frontend configuration
+# ======================================================================
+plugin.tx_spcharts {
+	## General settings
+	settings {
+		chartType        = {$plugin.tx_spcharts.settings.chartType}
+		chartSetup       = {$plugin.tx_spcharts.settings.chartSetup}
+	}
+
+	## View specific settings
+	view {
+		templateRootPath = {$plugin.tx_spcharts.view.templateRootPath}
+		partialRootPath  = {$plugin.tx_spcharts.view.partialRootPath}
+		layoutRootPath   = {$plugin.tx_spcharts.view.layoutRootPath}
+	}
+}
+
+
+## Include jQuery library
+[globalVar = LIT:1 = {$plugin.tx_spcharts.settings.libraries.jquery}]
+	page.includeJSlibs.jquery = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.min.js
+	page.includeJSlibs.jquery.disableCompression = 1
+[global]
+
+
+## Include jqPlot library
+[globalVar = LIT:1 = {$plugin.tx_spcharts.settings.libraries.jqplot}]
+	page.includeCSS.jqplot = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.css
+
+	page.includeJSlibs.jqplot1 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.min.js
+	page.includeJSlibs.jqplot1.disableCompression = 1
+
+	page.includeJSlibs.jqplot2 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.barRenderer.min.js
+	page.includeJSlibs.jqplot2.disableCompression = 1
+
+	page.includeJSlibs.jqplot3 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pieRenderer.min.js
+	page.includeJSlibs.jqplot3.disableCompression = 1
+
+	page.includeJSlibs.jqplot4 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.donutRenderer.min.js
+	page.includeJSlibs.jqplot4.disableCompression = 1
+
+	page.includeJSlibs.jqplot5 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js
+	page.includeJSlibs.jqplot5.disableCompression = 1
+
+	page.includeJSlibs.jqplot6 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pointLabels.min.js
+	page.includeJSlibs.jqplot6.disableCompression = 1
+
+	page.includeJSlibs.jqplot7 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.highlighter.min.js
+	page.includeJSlibs.jqplot7.disableCompression = 1
+[global]
+
+
+## Include default chart setup
+[globalVar = LIT:1 = {$plugin.tx_spcharts.settings.libraries.charts}]
+	page.includeCSS.charts = EXT:sp_charts/Resources/Public/Stylesheet/Charts.css
+	page.includeJS.charts = EXT:sp_charts/Resources/Public/Javascript/Chart.js
+[global]
+
+
+# ======================================================================
+# Backend configuration
+# ======================================================================
+module.tx_spcharts {
+	## General settings
+	settings {
+		## Stylesheets
+		stylesheet {
+			jqplot       = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.css
+			chart        = EXT:sp_charts/Resources/Public/Stylesheet/Charts.css
+		}
+
+		## JavaScript libraries
+		javascript {
+			jquery       = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.min.js
+			jqplot1      = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.min.js
+			jqplot2      = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.barRenderer.min.js
+			jqplot3      = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pieRenderer.min.js
+			jqplot4      = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.donutRenderer.min.js
+			jqplot5      = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js
+			jqplot6      = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pointLabels.min.js
+			jqplot7      = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.highlighter.min.js
+			chart        = EXT:sp_charts/Resources/Public/Javascript/Chart.js
+		}
+	}
+
+	## View specific settings
+	view < plugin.tx_spcharts.view
+}

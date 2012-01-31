@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for the sp_charts extension</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="plugin.title">Charts</label>
+			<label index="plugin.description">Adds a charts renderer to this page.</label>
+			<label index="module.title">Charts demo</label>
+			<label index="mlang_tabs_tab">Charts demo</label>
+			<label index="mlang_labels_tabdescr">Charts demo</label>
+
+			<label index="tt_content.flexform_pi1.s_def">General</label>
+			<label index="tt_content.flexform_pi1.s_def.chartType">Chart type</label>
+			<label index="tt_content.flexform_pi1.s_def.chartType.bar">Bar</label>
+			<label index="tt_content.flexform_pi1.s_def.chartType.column">Column</label>
+			<label index="tt_content.flexform_pi1.s_def.chartType.donut">Donut</label>
+			<label index="tt_content.flexform_pi1.s_def.chartType.line">Line</label>
+			<label index="tt_content.flexform_pi1.s_def.chartType.pie">Pie</label>
+			<label index="tt_content.flexform_pi1.s_def.chartSetup">Chart configuration</label>
+
+			<label index="title">Charts demo</label>
+			<label index="title_bar">Bar</label>
+			<label index="title_column">Column</label>
+			<label index="title_donut">Donut</label>
+			<label index="title_pie">Pie</label>
+			<label index="select_page">Please select a page...</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="plugin.title">Diagramm</label>
+			<label index="plugin.description">Fügt der aktuellen Seite eine Diagramm-Darstellung hinzu.</label>
+			<label index="module.title">Diagramm-Demo</label>
+			<label index="mlang_tabs_tab">Diagramm-Demo</label>
+			<label index="mlang_labels_tabdescr">Diagramm-Demo</label>
+
+			<label index="tt_content.flexform_pi1.s_def">Allgemein</label>
+			<label index="tt_content.flexform_pi1.s_def.chartType">Diagramm-Typ</label>
+			<label index="tt_content.flexform_pi1.s_def.chartType.bar">Bar</label>
+			<label index="tt_content.flexform_pi1.s_def.chartType.column">Column</label>
+			<label index="tt_content.flexform_pi1.s_def.chartType.donut">Donut</label>
+			<label index="tt_content.flexform_pi1.s_def.chartType.line">Line</label>
+			<label index="tt_content.flexform_pi1.s_def.chartType.pie">Pie</label>
+			<label index="tt_content.flexform_pi1.s_def.chartSetup">Diagramm-Konfiguration</label>
+
+			<label index="title">Diagramm-Demo</label>
+			<label index="title_bar">Bar</label>
+			<label index="title_column">Column</label>
+			<label index="title_donut">Donut</label>
+			<label index="title_pie">Pie</label>
+			<label index="select_page">Bitte eine Seite auswählen...</label>
+		</languageKey>
+	</data>
+</T3locallang>

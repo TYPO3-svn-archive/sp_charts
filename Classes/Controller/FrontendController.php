@@ -26,13 +26,7 @@
 	/**
 	 * Controller for the frontend plugin
 	 */
-	class Tx_SpCharts_Controller_FrontendController extends Tx_SpCharts_ontroller_AbstractController {
-
-		/**
-		 * @var array
-		 */
-		protected $plugin;
-
+	class Tx_SpCharts_Controller_FrontendController extends Tx_SpCharts_Controller_AbstractController {
 
 		/**
 		 * Initialize the current action
@@ -43,9 +37,10 @@
 				// Pre-parse TypoScript setup
 			$this->settings = Tx_SpCharts_Utility_TypoScript::parse($this->settings);
 
-				// Get information about current plugin
-			$contentObject = $this->configurationManager->getContentObject();
-			$this->plugin = (!empty($contentObject->data) ? $contentObject->data : array());
+				// Parse chart setup in plugin settings
+			if (!empty($this->settings['chartSetup']) && is_string($this->settings['chartSetup'])) {
+				$this->settings['chartSetup'] = Tx_SpCharts_Utility_TypoScript::parseTypoScriptString($this->settings['chartSetup']);
+			}
 		}
 
 
@@ -55,30 +50,37 @@
 		 * @return void
 		 */
 		public function showAction() {
-			$demoData = array(
-				array('AddThis',   180),
-				array('AddThis',   112),
-				array('Ask',       684),
-				array('Bluedot',   84),
-				array('Bluedot',   200),
-				array('Delicious', 480),
-				array('Delicidous', 480),
-				array('Deliscious', 480),
-				array('Delicdious', 480),
-				array('Delsicious', 480),
-				array('Delsicious', 480),
-				array('Delsicfious', 480),
-				array('Delicihous', 480),
-				array('Delficious', 480),
-				array('Delicious', 480),
-				array('Deliscious', 480),
-				array('Delgicious', 4860),
-				array('Deliecious', 4580),
-			);
+				// Get data to show in chart
+			$data = array();
+			if (!empty($this->settings['chartSetup']) && is_array($this->settings['chartSetup'])) {
+				foreach($this->settings['chartSetup'] as $set) {
+					if (!is_array($set)) {
+						throw new Exception('Chart setup is not well-formed');
+					}
+					$bars = array();
+					foreach ($set as $bar) {
+						if (!isset($bar['title'], $bar['value'])) {
+							throw new Exception('Chart setup for one bar is not well-formed');
+						}
+						$bars[] = array($bar['title'], $bar['value']);
+					}
+					$data[] = $bars;
+				}
+			}
 
-			$this->view->assign('data',     $demoData);
+				// Show demo data if empty
+			if (empty($data) && !empty($this->settings['showDemoData'])) {
+				$data = array(array(
+					array('Firefox', 180),
+					array('Internet Explorer', 112),
+					array('Google Chrome', 684),
+					array('Safari', 84),
+					array('Opera', 200),
+				));
+			}
+
+			$this->view->assign('data', $data);
 			$this->view->assign('settings', $this->settings);
-			$this->view->assign('plugin',   $this->plugin);
 		}
 
 	}

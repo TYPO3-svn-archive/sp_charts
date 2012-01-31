@@ -1,0 +1,5 @@
+# ======================================================================
+# Extension Configuration
+# ======================================================================
+# cat=Default Configuration/settings/100; type=boolean; label=Enable Demo Module: Add a demo module to backend to show the different chart types
+enableDemoModule = 1

@@ -4,10 +4,13 @@
 plugin.tx_spcharts {
 	settings {
 		# cat=Charts/settings/1000; type=string; label=Chart Type: Default chart type
-		chartType = 
+		chartType =
 
 		# cat=Charts/settings/1010; type=string; label=Chart Setup: Default chart setup
-		chartSetup = 
+		chartSetup =
+
+		# cat=Charts/settings/1020; type=boolean; label=Show Demo Data: Show demo data if "chartSetup" is empty
+		showDemoData = 1
 
 		libraries {
 			# cat=Charts/settings/1100; type=boolean; label=Load jQuery: Load jQuery library

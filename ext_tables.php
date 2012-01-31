@@ -11,7 +11,7 @@
 	);
 
 		// Add flexform field
-	$identifier = str_replace('_', '', $_EXTKEY) . '_chart';
+	$identifier = str_replace('_', '', $_EXTKEY) . '_frontend';
 	$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$identifier] = 'layout,select_key,recursive,pages';
 	$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$identifier] = 'pi_flexform';
 	t3lib_extMgm::addPiFlexFormValue($identifier, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/Chart.xml');

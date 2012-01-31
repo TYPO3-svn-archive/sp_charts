@@ -66,22 +66,30 @@
 		 * @return string The rendered chart
 		 */
 		public function render($data) {
-				// Get bars
-			$bars = array();
-			foreach ($data as $value) {
-				if (!isset($bars[$value[0]])) {
-					$bars[$value[0]] = (int) $value[1];
-				} else {
-					$bars[$value[0]] += (int) $value[1];
+			$sets = array();
+
+				// Get sets
+			foreach ($data as $set) {
+				$bars = array();
+				foreach ($set as $bar) {
+					if (!isset($bars[$bar[0]])) {
+						$bars[$bar[0]] = (int) $bar[1];
+					} else {
+						$bars[$bar[0]] += (int) $bar[1];
+					}
 				}
+
+				ksort($bars);
+
+				$set = array();
+				foreach ($bars as $key => $value) {
+					$set[] = array($key, $value);
+				}
+
+				$sets[] = $set;
 			}
 
-			$data = array();
-			foreach ($bars as $key => $value) {
-				$data[] = array($key, $value);
-			}
-
-			return $this->renderChart(array($data), $this->options);
+			return $this->renderChart($sets, $this->options);
 		}
 
 	}

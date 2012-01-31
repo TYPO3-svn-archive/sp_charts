@@ -29,6 +29,11 @@
 	class Tx_SpCharts_Utility_TypoScript {
 
 		/**
+		 * @var Tx_Extbase_Object_ObjectManager
+		 */
+		static protected $objectManager;
+
+		/**
 		 * @var object
 		 */
 		static protected $frontend;
@@ -56,8 +61,8 @@
 		 */
 		static protected function initialize() {
 				// Get configuration manager
-			$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
-			self::$configurationManager = $objectManager->get('Tx_Extbase_Configuration_ConfigurationManager');
+			self::$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+			self::$configurationManager = self::$objectManager->get('Tx_Extbase_Configuration_ConfigurationManager');
 
 				// Simulate Frontend
 			if (TYPO3_MODE != 'FE') {
@@ -157,7 +162,7 @@
 
 		/**
 		 * Returns unparsed TypoScript setup collected from the rootline
-		 * 
+		 *
 		 * @param integer $pid The pid to start with
 		 * @param string $typoScriptPath TypoScript path
 		 * @return array TypoScript setup
@@ -207,7 +212,6 @@
 		 *
 		 * @param array $configuration TypoScript configuration array
 		 * @return array Parsed configuration
-		 * @api
 		 */
 		static public function parseTypoScriptArray(array $configuration) {
 			$typoScriptArray = array();
@@ -229,6 +233,34 @@
 			}
 
 			return $typoScriptArray;
+		}
+
+
+		/**
+		 * Parse a TypoScript string
+		 *
+		 * @param string $configuration TypoScript configuration text
+		 * @param array $setup Optional TypoScript setup
+		 * @return array Parsed configuration
+		 */
+		static public function parseTypoScriptString($configuration, array $setup = array()) {
+			if (empty($configuration)) {
+				return array();
+			}
+
+			if (empty(self::$objectManager)) {
+				self::initialize();
+			}
+
+			$parser = self::$objectManager->get('t3lib_tsparser');
+			$parser->setup = $setup;
+			$parser->parse($configuration);
+
+			if (is_array($parser->setup)) {
+				return self::parseTypoScriptArray($parser->setup);
+			}
+
+			return array();
 		}
 
 	}

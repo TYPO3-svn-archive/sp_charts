@@ -6,6 +6,7 @@ plugin.tx_spcharts {
 	settings {
 		chartType        = {$plugin.tx_spcharts.settings.chartType}
 		chartSetup       = {$plugin.tx_spcharts.settings.chartSetup}
+		showDemoData     = {$plugin.tx_spcharts.settings.showDemoData}
 	}
 
 	## View specific settings

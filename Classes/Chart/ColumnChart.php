@@ -32,7 +32,6 @@
 		 * @var string
 		 */
 		protected $options = '
-			seriesColors: [\'#69A550\'],
 			seriesDefaults: {
 				renderer: jQuery.jqplot.BarRenderer,
 				pointLabels: {
@@ -74,22 +73,32 @@
 		 * @return string The rendered chart
 		 */
 		public function render($data) {
-				// Get bars
-			$bars = array();
-			foreach ($data as $value) {
-				if (!isset($bars[$value[0]])) {
-					$bars[$value[0]] = (int) $value[1];
-				} else {
-					$bars[$value[0]] += (int) $value[1];
+			$titles = array();
+			$sets = array();
+
+				// Get sets
+			foreach ($data as $set) {
+				$bars = array();
+				foreach ($set as $bar) {
+					if (!isset($bars[$bar[0]])) {
+						$bars[$bar[0]] = (int) $bar[1];
+					} else {
+						$bars[$bar[0]] += (int) $bar[1];
+					}
 				}
+
+				ksort($bars);
+
+				if (empty($titles)) {
+					$titles = array_keys($bars);
+				}
+
+				$sets[] = array_values($bars);
 			}
 
-			arsort($bars);
+			$options = sprintf($this->options, json_encode($titles));
 
-			$data = array(array_values($bars));
-			$options = sprintf($this->options, json_encode(array_keys($bars)));
-
-			return $this->renderChart($data, $options);
+			return $this->renderChart($sets, $options);
 		}
 
 	}

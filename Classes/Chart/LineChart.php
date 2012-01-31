@@ -24,37 +24,35 @@
 	 ********************************************************************/
 
 	/**
-	 * Renderer for pie chart
+	 * Renderer for line chart
 	 */
-	class Tx_SpCharts_Chart_PieChart extends Tx_SpCharts_Chart_AbstractChart {
+	class Tx_SpCharts_Chart_LineChart extends Tx_SpCharts_Chart_AbstractChart {
 
 		/**
 		 * @var string
 		 */
 		protected $options = '
-			seriesDefaults:{
-				renderer: jQuery.jqplot.PieRenderer,
-				rendererOptions: {
-					showDataLabels: true,
-					fill: true,
-					startAngle: -90,
-					sliceMargin: 5,
-					lineWidth: 1,
-					padding: 15,
-					dataLabels: \'value\',
-					dataLabelPositionFactor: 1.1
+			axes: {
+				yaxis: {
+					renderer: jQuery.jqplot.CategoryAxisRenderer
 				}
 			},
-			legend: {
-				show:true,
-				location: \'e\'
-			},
 			grid: {
-				drawGridLines: false,
+				gridLineColor: \'#B9B9B9\',
 				background: \'#F8F8F8\',
-				borderColor: \'#F8F8F8\',
-				borderWidth: 0,
+				borderColor: \'#515151\',
+				borderWidth: 0.5,
 				shadow: false
+			},
+			highlighter: {
+				show: true,
+				showMarker: true,
+				sizeAdjust: 7.5,
+				tooltipLocation: \'nw\',
+				tooltipAxes: \'x\'
+			},
+			cursor: {
+				show: false
 			}
 		';
 
@@ -66,22 +64,28 @@
 		 * @return string The rendered chart
 		 */
 		public function render($data) {
-				// Get bars
-			$bars = array();
-			foreach ($data as $value) {
-				if (!isset($bars[$value[0]])) {
-					$bars[$value[0]] = (int) $value[1];
-				} else {
-					$bars[$value[0]] += (int) $value[1];
+			$sets = array();
+
+				// Get sets
+			foreach ($data as $set) {
+				$bars = array();
+				foreach ($set as $bar) {
+					if (!isset($bars[$bar[0]])) {
+						$bars[$bar[0]] = (int) $bar[1];
+					} else {
+						$bars[$bar[0]] += (int) $bar[1];
+					}
 				}
+
+				$set = array();
+				foreach ($bars as $key => $value) {
+					$set[] = array($value, $key);
+				}
+
+				$sets[] = $set;
 			}
 
-			$data = array();
-			foreach ($bars as $key => $value) {
-				$data[] = array($key, $value);
-			}
-
-			return $this->renderChart(array($data), $this->options);
+			return $this->renderChart($sets, $this->options);
 		}
 
 	}

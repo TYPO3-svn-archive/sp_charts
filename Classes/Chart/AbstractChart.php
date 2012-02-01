@@ -31,6 +31,15 @@
 		/**
 		 * @var array
 		 */
+		protected $colors = array(
+			'gridLine'   => '#B9B9B9',
+			'background' => '#F8F8F8',
+			'border'     => '#515151',
+		);
+
+		/**
+		 * @var array
+		 */
 		protected $settings = array();
 
 		/**
@@ -60,6 +69,13 @@
 		 */
 		public function setConfiguration(array $settings) {
 			$this->settings = $settings;
+
+				// Override colors
+			if (!empty($this->settings['colors']) && is_array($this->settings['colors'])) {
+				foreach ($this->settings['colors'] as $key => $value) {
+					$this->colors[$key] = '#' . ltrim($value, '#');
+				}
+			}
 		}
 
 

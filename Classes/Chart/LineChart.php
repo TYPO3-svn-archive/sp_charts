@@ -38,9 +38,9 @@
 				}
 			},
 			grid: {
-				gridLineColor: \'#B9B9B9\',
-				background: \'#F8F8F8\',
-				borderColor: \'#515151\',
+				gridLineColor: \'%1$s\',
+				background: \'%2$s\',
+				borderColor: \'%3$s\',
 				borderWidth: 0.5,
 				shadow: false
 			},
@@ -85,7 +85,15 @@
 				$sets[] = $set;
 			}
 
-			return $this->renderChart($sets, $this->options);
+				// Get options
+			$options = sprintf(
+				$this->options,
+				$this->colors['gridLine'],
+				$this->colors['background'],
+				$this->colors['border']
+			);
+
+			return $this->renderChart($sets, $options);
 		}
 
 	}

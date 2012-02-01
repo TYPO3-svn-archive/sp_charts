@@ -12,14 +12,25 @@ plugin.tx_spcharts {
 		# cat=Charts: Frontend/settings/1020; type=boolean; label=Hide Demo Data: Hide demo data, which is shown if "chartSetup" is empty
 		hideDemoData = 0
 
+		colors {
+			# cat=Charts: Frontend/settings/1100; type=string; label=Grid Line Color: Color for the lines in grid
+			gridLine = #B9B9B9
+
+			# cat=Charts: Frontend/settings/1110; type=string; label=Background Color: Color for the chart background
+			background = #FFFFFF
+
+			# cat=Charts: Frontend/settings/1120; type=string; label=Border Color: Color for the grid border
+			border = #515151
+		}
+
 		libraries {
-			# cat=Charts: Frontend/settings/1100; type=boolean; label=Load jQuery: Load jQuery library
+			# cat=Charts: Frontend/settings/1200; type=boolean; label=Load jQuery: Load jQuery library
 			jquery = 1
 
-			# cat=Charts: Frontend/settings/1110; type=boolean; label=Load jqPlot: Load jqPlot library
+			# cat=Charts: Frontend/settings/1210; type=boolean; label=Load jqPlot: Load jqPlot library
 			jqplot = 1
 
-			# cat=Charts: Frontend/settings/1120; type=boolean; label=Load Chart Setup: Load default chart setup
+			# cat=Charts: Frontend/settings/1220; type=boolean; label=Load Chart Setup: Load default chart setup
 			charts = 1
 		}
 	}
@@ -50,6 +61,17 @@ module.tx_spcharts {
 
 		# cat=Charts: Backend/settings/1020; type=boolean; label=Hide Demo Data: Hide demo data, which is shown if "chartSetup" is empty
 		hideDemoData = 0
+
+		colors {
+			# cat=Charts: Backend/settings/1100; type=string; label=Grid Line Color: Color for the lines in grid
+			gridLine = #B9B9B9
+
+			# cat=Charts: Backend/settings/1110; type=string; label=Background Color: Color for the chart background
+			background = #F8F8F8
+
+			# cat=Charts: Backend/settings/1120; type=string; label=Border Color: Color for the grid border
+			border = #515151
+		}
 	}
 
 	view {

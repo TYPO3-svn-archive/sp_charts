@@ -46,13 +46,13 @@
 			axes: {
 				xaxis: {
 					renderer: jQuery.jqplot.CategoryAxisRenderer,
-					ticks: %1$s
+					ticks: %4$s
 				}
 			},
 			grid: {
-				gridLineColor: \'#B9B9B9\',
-				background: \'#F8F8F8\',
-				borderColor: \'#515151\',
+				gridLineColor: \'%1$s\',
+				background: \'%2$s\',
+				borderColor: \'%3$s\',
 				borderWidth: 0.5,
 				shadow: false
 			},
@@ -96,7 +96,14 @@
 				$sets[] = array_values($bars);
 			}
 
-			$options = sprintf($this->options, json_encode($titles));
+				// Get options
+			$options = sprintf(
+				$this->options,
+				$this->colors['gridLine'],
+				$this->colors['background'],
+				$this->colors['border'],
+				json_encode($titles)
+			);
 
 			return $this->renderChart($sets, $options);
 		}

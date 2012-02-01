@@ -7,6 +7,12 @@ plugin.tx_spcharts {
 		chartType        = {$plugin.tx_spcharts.settings.chartType}
 		chartSetup       = {$plugin.tx_spcharts.settings.chartSetup}
 		hideDemoData     = {$plugin.tx_spcharts.settings.hideDemoData}
+
+		colors {
+			gridLine       = {$plugin.tx_spcharts.settings.colors.gridLine}
+			background     = {$plugin.tx_spcharts.settings.colors.background}
+			border         = {$plugin.tx_spcharts.settings.colors.border}
+		}
 	}
 
 	## View specific settings
@@ -68,6 +74,12 @@ module.tx_spcharts {
 		chartType        = {$module.tx_spcharts.settings.chartType}
 		chartSetup       = {$module.tx_spcharts.settings.chartSetup}
 		hideDemoData     = {$module.tx_spcharts.settings.hideDemoData}
+
+		colors {
+			gridLine       = {$module.tx_spcharts.settings.colors.gridLine}
+			background     = {$module.tx_spcharts.settings.colors.background}
+			border         = {$module.tx_spcharts.settings.colors.border}
+		}
 
 		## Stylesheets
 		stylesheet {

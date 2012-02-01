@@ -51,8 +51,8 @@
 			},
 			grid: {
 				drawGridLines: false,
-				background: \'#F8F8F8\',
-				borderColor: \'#F8F8F8\',
+				background: \'%1$s\',
+				borderColor: \'%2$s\',
 				borderWidth: 0,
 				shadow: false
 			}
@@ -89,7 +89,14 @@
 				$sets[] = $set;
 			}
 
-			return $this->renderChart($sets, $this->options);
+				// Get options
+			$options = sprintf(
+				$this->options,
+				$this->colors['background'],
+				$this->colors['background']
+			);
+
+			return $this->renderChart($sets, $options);
 		}
 
 	}

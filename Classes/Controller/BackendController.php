@@ -33,11 +33,6 @@
 		 */
 		protected $extensionName = 'SpCharts';
 
-		/**
-		 * @var integer
-		 */
-		protected $pageId = 0;
-
 
 		/**
 		 * Process a request
@@ -68,33 +63,16 @@
 		 * @return void
 		 */
 		protected function initializeAction() {
-			$this->pageId = Tx_SpCharts_Utility_Backend::getPageId();
-
 				// Forward to list action if page id is empty
+			$pageId = Tx_SpCharts_Utility_Backend::getPageId();
 			$action = $this->request->getControllerActionName();
-			if (empty($this->pageId) && $action !== 'index') {
+			if (empty($pageId) && $action !== 'index') {
 				$this->forward('index');
 			}
 
 				// Pre-parse TypoScript setup
 			if (!empty($this->settings) && is_array($this->settings)) {
 				$this->settings = Tx_SpCharts_Utility_TypoScript::parse($this->settings);
-			}
-
-				// Add stylesheets
-			if (!empty($this->settings['stylesheet']) && is_array($this->settings['stylesheet'])) {
-				foreach($this->settings['stylesheet'] as $file) {
-					$this->pageRenderer->addCssFile($this->getRelativePath($file));
-				}
-			}
-
-				// Add javascript libraries
-			if (!empty($this->settings['javascript']) && is_array($this->settings['javascript'])) {
-				$libraries = array_reverse($this->settings['javascript']);
-				foreach($libraries as $key => $file) {
-					$file = $this->getRelativePath($file);
-					$this->pageRenderer->addJsLibrary($key, $file, 'text/javascript', FALSE, TRUE);
-				}
 			}
 		}
 
@@ -117,24 +95,6 @@
 		public function showAction() {
 			$this->view->assign('data', $this->getData($this->settings));
 			$this->view->assign('settings', $this->settings);
-		}
-
-
-		/**
-		 * Get relative path
-		 *
-		 * @param string $fileName The file name
-		 * @return string Relative path
-		 */
-		protected function getRelativePath($fileName) {
-			if (empty($fileName)) {
-				return '';
-			}
-
-			$backPath = $this->doc->backpath . '../';
-			$fileName = t3lib_div::getFileAbsFileName($fileName);
-
-			return str_replace(PATH_site, $backPath, $fileName);
 		}
 
 	}

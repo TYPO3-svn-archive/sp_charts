@@ -26,7 +26,7 @@
 	/**
 	 * Chart service
 	 */
-	class Tx_SpCharts_Service_ChartService {
+	class Tx_SpCharts_Service_ChartService implements t3lib_Singleton {
 
 		/**
 		 * @var array
@@ -51,45 +51,49 @@
 
 		/**
 		 * Initialize the service
-		 * 
+		 *
 		 * @return void
 		 */
 		public function __construct() {
-				// Find configured renderers
-			if (empty($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['sp_charts']['chartRenderers'])
-			 || !is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['sp_charts']['chartRenderers'])) {
-				throw new Exception('No chart renderers definined');
+				// Find registered renderers
+			$this->availableRenderers = $this->getRegisteredRenderers();
+
+				// Get TypoScript settings
+			if (TYPO3_MODE == 'FE') {
+				$this->settings = Tx_SpCharts_Utility_TypoScript::getSetupForPid($GLOBALS['TSFE']->id, 'plugin.tx_spcharts.settings');
+			} else {
+				$pid = Tx_SpCharts_Utility_Backend::getPageId();
+				$this->settings = Tx_SpCharts_Utility_TypoScript::getSetupForPid($pid, 'module.tx_spcharts.settings');
 			}
-			$this->availableRenderers = $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['sp_charts']['chartRenderers'];
+			$this->settings = Tx_SpCharts_Utility_TypoScript::parse($this->settings);
+
+				// Get object manager
+			$this->objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+
+				// Load required libraries
+			$this->loadLibraries();
 		}
 
 
 		/**
-		 * @param Tx_Extbase_Configuration_ConfigurationManager $configurationManager
-		 * @return void
+		 * Renders a chart
+		 *
+		 * @param string $type The type of chart to render
+		 * @param array $data The rows and cols to show
+		 * @return string The rendered chart
 		 */
-		public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManager $configurationManager) {
-			$settings = $configurationManager->getConfiguration(
-				Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
-			);
-			if (!empty($settings)) {
-				$this->settings = Tx_SpCharts_Utility_TypoScript::parse($settings);
+		public function renderChart($type, array $data) {
+			$renderer = $this->getRenderer($type);
+			if (!empty($renderer)) {
+				return $renderer->render($data);
 			}
-		}
-
-
-		/**
-		 * @var Tx_Extbase_Object_ObjectManager $objectManager
-		 * @return void
-		 */
-		public function injectObjectManager(Tx_Extbase_Object_ObjectManager $objectManager) {
-			$this->objectManager = $objectManager;
+			return '';
 		}
 
 
 		/**
 		 * Return renderer by given type
-		 * 
+		 *
 		 * @param string $type The chart type
 		 * @return Tx_SpCharts_Chart_ChartInterface The renderer
 		 */
@@ -120,18 +124,67 @@
 
 
 		/**
-		 * Renders a chart
+		 * Returns all registered renderers
 		 *
-		 * @param string $type The type of chart to render
-		 * @param array $data The rows and cols to show
-		 * @return string The rendered chart
+		 * @return array The renderers
 		 */
-		public function renderChart($type, array $data) {
-			$renderer = $this->getRenderer($type);
-			if (!empty($renderer)) {
-				return $renderer->render($data);
+		protected function getRegisteredRenderers() {
+			if (empty($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['sp_charts']['chartRenderers'])
+			 || !is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['sp_charts']['chartRenderers'])) {
+				return array();
 			}
-			return '';
+			return $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['sp_charts']['chartRenderers'];
+		}
+
+
+		/**
+		 * Load required JS and CSS files into page renderer
+		 *
+		 * @return void
+		 */
+		protected function loadLibraries() {
+			$pageRenderer = $this->objectManager->get('t3lib_PageRenderer');
+
+				// Add stylesheets
+			if (!empty($this->settings['stylesheet']) && is_array($this->settings['stylesheet'])) {
+				foreach($this->settings['stylesheet'] as $file) {
+					$pageRenderer->addCssFile($this->getRelativePath($file));
+				}
+			}
+
+				// Add javascript libraries
+			if (!empty($this->settings['javascript']) && is_array($this->settings['javascript'])) {
+				$libraries = array_reverse($this->settings['javascript']);
+				foreach($libraries as $key => $file) {
+					$file = $this->getRelativePath($file);
+					$pageRenderer->addJsLibrary($key, $file, 'text/javascript', FALSE, TRUE);
+				}
+			}
+		}
+
+
+		/**
+		 * Get relative path
+		 *
+		 * @param string $fileName The file name
+		 * @return string Relative path
+		 */
+		protected function getRelativePath($fileName) {
+			if (empty($fileName)) {
+				return '';
+			}
+
+			$backPath = '';
+			if (TYPO3_MODE != 'FE') {
+				$backPath = '../';
+				if (!empty($GLOBALS['SOBE']) && !empty($GLOBALS['SOBE']->doc)) {
+					$backPath = $GLOBALS['SOBE']->doc->backpath . '../';
+				}
+			}
+
+			$fileName = t3lib_div::getFileAbsFileName($fileName);
+
+			return str_replace(PATH_site, $backPath, $fileName);
 		}
 
 	}

@@ -30,7 +30,7 @@
 
 		/**
 		 * Get configured data
-		 * 
+		 *
 		 * @param array $settings The TypoScript setup
 		 * @return array The data to show
 		 */
@@ -59,7 +59,7 @@
 
 		/**
 		 * Get all data to show in charts
-		 * 
+		 *
 		 * @param array $settings The TypoScript setup
 		 * @return array The data to show
 		 */

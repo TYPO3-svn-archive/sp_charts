@@ -8,6 +8,7 @@ plugin.tx_spcharts {
 		chartSetup       = {$plugin.tx_spcharts.settings.chartSetup}
 		hideDemoData     = {$plugin.tx_spcharts.settings.hideDemoData}
 
+		## Chart colors
 		colors {
 			gridLine       = {$plugin.tx_spcharts.settings.colors.gridLine}
 			background     = {$plugin.tx_spcharts.settings.colors.background}
@@ -26,42 +27,33 @@ plugin.tx_spcharts {
 
 ## Include jQuery library
 [globalVar = LIT:1 = {$plugin.tx_spcharts.settings.libraries.jquery}]
-	page.includeJSlibs.jquery = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.min.js
-	page.includeJSlibs.jquery.disableCompression = 1
+	plugin.tx_spcharts.settings {
+		javascript.jquery = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.min.js
+	}
 [global]
 
 
 ## Include jqPlot library
 [globalVar = LIT:1 = {$plugin.tx_spcharts.settings.libraries.jqplot}]
-	page.includeCSS.jqplot = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.css
-
-	page.includeJSlibs.jqplot1 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.min.js
-	page.includeJSlibs.jqplot1.disableCompression = 1
-
-	page.includeJSlibs.jqplot2 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.barRenderer.min.js
-	page.includeJSlibs.jqplot2.disableCompression = 1
-
-	page.includeJSlibs.jqplot3 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pieRenderer.min.js
-	page.includeJSlibs.jqplot3.disableCompression = 1
-
-	page.includeJSlibs.jqplot4 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.donutRenderer.min.js
-	page.includeJSlibs.jqplot4.disableCompression = 1
-
-	page.includeJSlibs.jqplot5 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js
-	page.includeJSlibs.jqplot5.disableCompression = 1
-
-	page.includeJSlibs.jqplot6 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pointLabels.min.js
-	page.includeJSlibs.jqplot6.disableCompression = 1
-
-	page.includeJSlibs.jqplot7 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.highlighter.min.js
-	page.includeJSlibs.jqplot7.disableCompression = 1
+	plugin.tx_spcharts.settings {
+		stylesheet.jqplot  = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.css
+		javascript.jqplot1 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.min.js
+		javascript.jqplot2 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.barRenderer.min.js
+		javascript.jqplot3 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pieRenderer.min.js
+		javascript.jqplot4 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.donutRenderer.min.js
+		javascript.jqplot5 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js
+		javascript.jqplot6 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pointLabels.min.js
+		javascript.jqplot7 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.highlighter.min.js
+	}
 [global]
 
 
 ## Include default chart setup
 [globalVar = LIT:1 = {$plugin.tx_spcharts.settings.libraries.charts}]
-	page.includeCSS.charts = EXT:sp_charts/Resources/Public/Stylesheet/Charts.css
-	page.includeJS.charts = EXT:sp_charts/Resources/Public/Javascript/Chart.js
+	plugin.tx_spcharts.settings {
+		stylesheet.charts = EXT:sp_charts/Resources/Public/Stylesheet/Charts.css
+		javascript.charts = EXT:sp_charts/Resources/Public/Javascript/Chart.js
+	}
 [global]
 
 
@@ -75,6 +67,7 @@ module.tx_spcharts {
 		chartSetup       = {$module.tx_spcharts.settings.chartSetup}
 		hideDemoData     = {$module.tx_spcharts.settings.hideDemoData}
 
+		## Chart colors
 		colors {
 			gridLine       = {$module.tx_spcharts.settings.colors.gridLine}
 			background     = {$module.tx_spcharts.settings.colors.background}

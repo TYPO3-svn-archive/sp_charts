@@ -13,6 +13,7 @@
 		'tx_spcharts_controller_backendcontroller'            => $extensionClassesPath . 'Controller/BackendController.php',
 		'tx_spcharts_controller_frontendcontroller'           => $extensionClassesPath . 'Controller/FrontendController.php',
 		'tx_spcharts_utility_backend'                         => $extensionClassesPath . 'Utility/Backend.php',
+		'tx_spcharts_utility_tca'                             => $extensionClassesPath . 'Utility/Tca.php',
 		'tx_spcharts_utility_typoscript'                      => $extensionClassesPath . 'Utility/TypoScript.php',
 		'tx_spcharts_viewhelpers_chartviewhelper'             => $extensionClassesPath . 'ViewHelpers/ChartViewHelper.php',
 		'tx_spcharts_viewhelpers_spriteiconviewhelper'        => $extensionClassesPath . 'ViewHelpers/SpriteIconViewHelper.php',

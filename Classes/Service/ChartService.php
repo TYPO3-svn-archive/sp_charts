@@ -29,11 +29,6 @@
 	class Tx_SpCharts_Service_ChartService {
 
 		/**
-		 * @var string
-		 */
-		protected $extensionKey = 'sp_charts';
-
-		/**
 		 * @var array
 		 */
 		protected $availableRenderers = array();
@@ -61,11 +56,11 @@
 		 */
 		public function __construct() {
 				// Find configured renderers
-			if (empty($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$this->extensionKey]['chartRenderers'])
-			 || !is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$this->extensionKey]['chartRenderers'])) {
+			if (empty($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['sp_charts']['chartRenderers'])
+			 || !is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['sp_charts']['chartRenderers'])) {
 				throw new Exception('No chart renderers definined');
 			}
-			$this->availableRenderers = $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$this->extensionKey]['chartRenderers'];
+			$this->availableRenderers = $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['sp_charts']['chartRenderers'];
 		}
 
 
@@ -110,12 +105,13 @@
 			}
 
 				// Make an instance of given chart
-			if (empty($this->availableRenderers[$type])) {
+			if (empty($this->availableRenderers[$type]['class'])) {
 				throw new Exception('No chart renderer found for type "' . $type . '"');
 			}
-			$renderer = $this->objectManager->get($this->availableRenderers[$type]);
+			$class = $this->availableRenderers[$type]['class'];
+			$renderer = $this->objectManager->get($class);
 			if (empty($renderer) || !$renderer instanceof Tx_SpCharts_Chart_ChartInterface) {
-				throw new Exception('Class "' . $this->availableRenderers[$type] . '" is a not valid chart renderer');
+				throw new Exception('Class "' . $class . '" is a not valid chart renderer');
 			}
 			$renderer->setConfiguration($this->settings);
 

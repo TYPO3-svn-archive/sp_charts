@@ -18,33 +18,7 @@
 							<config>
 								<type>select</type>
 								<default>bar</default>
-								<items type="array">
-									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:sp_charts/Resources/Private/Language/locallang.xml:tt_content.flexform_pi1.s_def.chartType.bar</numIndex>
-										<numIndex index="1">bar</numIndex>
-										<numIndex index="2">EXT:sp_charts/Resources/Public/Images/Chart/Bar.gif</numIndex>
-									</numIndex>
-									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:sp_charts/Resources/Private/Language/locallang.xml:tt_content.flexform_pi1.s_def.chartType.column</numIndex>
-										<numIndex index="1">column</numIndex>
-										<numIndex index="2">EXT:sp_charts/Resources/Public/Images/Chart/Column.gif</numIndex>
-									</numIndex>
-									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:sp_charts/Resources/Private/Language/locallang.xml:tt_content.flexform_pi1.s_def.chartType.donut</numIndex>
-										<numIndex index="1">donut</numIndex>
-										<numIndex index="2">EXT:sp_charts/Resources/Public/Images/Chart/Donut.gif</numIndex>
-									</numIndex>
-									<numIndex index="3" type="array">
-										<numIndex index="0">LLL:EXT:sp_charts/Resources/Private/Language/locallang.xml:tt_content.flexform_pi1.s_def.chartType.line</numIndex>
-										<numIndex index="1">line</numIndex>
-										<numIndex index="2">EXT:sp_charts/Resources/Public/Images/Chart/Line.gif</numIndex>
-									</numIndex>
-									<numIndex index="4" type="array">
-										<numIndex index="0">LLL:EXT:sp_charts/Resources/Private/Language/locallang.xml:tt_content.flexform_pi1.s_def.chartType.pie</numIndex>
-										<numIndex index="1">pie</numIndex>
-										<numIndex index="2">EXT:sp_charts/Resources/Public/Images/Chart/Pie.gif</numIndex>
-									</numIndex>
-								</items>
+								<itemsProcFunc>Tx_SpCharts_Utility_Tca->getRenderes</itemsProcFunc>
 								<minitems>0</minitems>
 								<maxitems>1</maxitems>
 								<size>1</size>

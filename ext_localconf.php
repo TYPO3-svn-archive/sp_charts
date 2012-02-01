@@ -17,10 +17,35 @@
 	if (empty($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$_EXTKEY]['chartRenderers'])) {
 		$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$_EXTKEY]['chartRenderers'] = array();
 	}
-	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$_EXTKEY]['chartRenderers']['bar']    = 'Tx_SpCharts_Chart_BarChart';
-	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$_EXTKEY]['chartRenderers']['column'] = 'Tx_SpCharts_Chart_ColumnChart';
-	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$_EXTKEY]['chartRenderers']['donut']  = 'Tx_SpCharts_Chart_DonutChart';
-	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$_EXTKEY]['chartRenderers']['line']   = 'Tx_SpCharts_Chart_LineChart';
-	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$_EXTKEY]['chartRenderers']['pie']    = 'Tx_SpCharts_Chart_PieChart';
+
+	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$_EXTKEY]['chartRenderers']['bar'] = array(
+		'class' => 'Tx_SpCharts_Chart_BarChart',
+		'title' => 'LLL:EXT:sp_charts/Resources/Private/Language/locallang.xml:chart_bar',
+		'image' => 'EXT:sp_charts/Resources/Public/Images/Chart/Bar.gif',
+	);
+
+	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$_EXTKEY]['chartRenderers']['column'] = array(
+		'class' => 'Tx_SpCharts_Chart_ColumnChart',
+		'title' => 'LLL:EXT:sp_charts/Resources/Private/Language/locallang.xml:chart_column',
+		'image' => 'EXT:sp_charts/Resources/Public/Images/Chart/Column.gif',
+	);
+
+	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$_EXTKEY]['chartRenderers']['donut'] = array(
+		'class' => 'Tx_SpCharts_Chart_DonutChart',
+		'title' => 'LLL:EXT:sp_charts/Resources/Private/Language/locallang.xml:chart_donut',
+		'image' => 'EXT:sp_charts/Resources/Public/Images/Chart/Donut.gif',
+	);
+
+	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$_EXTKEY]['chartRenderers']['line'] = array(
+		'class' => 'Tx_SpCharts_Chart_LineChart',
+		'title' => 'LLL:EXT:sp_charts/Resources/Private/Language/locallang.xml:chart_line',
+		'image' => 'EXT:sp_charts/Resources/Public/Images/Chart/Line.gif',
+	);
+
+	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$_EXTKEY]['chartRenderers']['pie'] = array(
+		'class' => 'Tx_SpCharts_Chart_PieChart',
+		'title' => 'LLL:EXT:sp_charts/Resources/Private/Language/locallang.xml:chart_pie',
+		'image' => 'EXT:sp_charts/Resources/Public/Images/Chart/Pie.gif',
+	);
 
 ?>

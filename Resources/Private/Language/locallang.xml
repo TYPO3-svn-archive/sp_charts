@@ -14,12 +14,13 @@
 
 			<label index="tt_content.flexform_pi1.s_def">General</label>
 			<label index="tt_content.flexform_pi1.s_def.chartType">Chart type</label>
-			<label index="tt_content.flexform_pi1.s_def.chartType.bar">Bar</label>
-			<label index="tt_content.flexform_pi1.s_def.chartType.column">Column</label>
-			<label index="tt_content.flexform_pi1.s_def.chartType.donut">Donut</label>
-			<label index="tt_content.flexform_pi1.s_def.chartType.line">Line</label>
-			<label index="tt_content.flexform_pi1.s_def.chartType.pie">Pie</label>
 			<label index="tt_content.flexform_pi1.s_def.chartSetup">Chart configuration</label>
+
+			<label index="chart_bar">Bar</label>
+			<label index="chart_column">Column</label>
+			<label index="chart_donut">Donut</label>
+			<label index="chart_line">Line</label>
+			<label index="chart_pie">Pie</label>
 
 			<label index="title">Charts demo</label>
 			<label index="title_bar">Bar</label>
@@ -38,12 +39,13 @@
 
 			<label index="tt_content.flexform_pi1.s_def">Allgemein</label>
 			<label index="tt_content.flexform_pi1.s_def.chartType">Diagramm-Typ</label>
-			<label index="tt_content.flexform_pi1.s_def.chartType.bar">Bar</label>
-			<label index="tt_content.flexform_pi1.s_def.chartType.column">Column</label>
-			<label index="tt_content.flexform_pi1.s_def.chartType.donut">Donut</label>
-			<label index="tt_content.flexform_pi1.s_def.chartType.line">Line</label>
-			<label index="tt_content.flexform_pi1.s_def.chartType.pie">Pie</label>
 			<label index="tt_content.flexform_pi1.s_def.chartSetup">Diagramm-Konfiguration</label>
+
+			<label index="chart_bar">Bar</label>
+			<label index="chart_column">Column</label>
+			<label index="chart_donut">Donut</label>
+			<label index="chart_line">Line</label>
+			<label index="chart_pie">Pie</label>
 
 			<label index="title">Diagramm-Demo</label>
 			<label index="title_bar">Bar</label>

@@ -1,37 +1,65 @@
 # ======================================================================
-# Default configuration for sp_charts
+# Frontend configuration
 # ======================================================================
 plugin.tx_spcharts {
 	settings {
-		# cat=Charts/settings/1000; type=string; label=Chart Type: Default chart type
+		# cat=Charts: Frontend/settings/1000; type=string; label=Chart Type: Default chart type
 		chartType =
 
-		# cat=Charts/settings/1010; type=string; label=Chart Setup: Default chart setup
+		# cat=Charts: Frontend/settings/1010; type=string; label=Chart Setup: Default chart setup
 		chartSetup =
 
-		# cat=Charts/settings/1020; type=boolean; label=Show Demo Data: Show demo data if "chartSetup" is empty
-		showDemoData = 1
+		# cat=Charts: Frontend/settings/1020; type=boolean; label=Hide Demo Data: Hide demo data, which is shown if "chartSetup" is empty
+		hideDemoData = 0
 
 		libraries {
-			# cat=Charts/settings/1100; type=boolean; label=Load jQuery: Load jQuery library
+			# cat=Charts: Frontend/settings/1100; type=boolean; label=Load jQuery: Load jQuery library
 			jquery = 1
 
-			# cat=Charts/settings/1110; type=boolean; label=Load jqPlot: Load jqPlot library
+			# cat=Charts: Frontend/settings/1110; type=boolean; label=Load jqPlot: Load jqPlot library
 			jqplot = 1
 
-			# cat=Charts/settings/1120; type=boolean; label=Load Chart Setup: Load default chart setup
+			# cat=Charts: Frontend/settings/1120; type=boolean; label=Load Chart Setup: Load default chart setup
 			charts = 1
 		}
 	}
 
 	view {
-		# cat=Charts/view/2000; type=string; label=Template root path: Path to template root
+		# cat=Charts: Frontend/view/2000; type=string; label=Template root path: Path to template root
 		templateRootPath = EXT:sp_charts/Resources/Private/Templates/
 
-		# cat=Charts/view/2010; type=string; label=Partial root path: Path to template partials
+		# cat=Charts: Frontend/view/2010; type=string; label=Partial root path: Path to template partials
 		partialRootPath = EXT:sp_charts/Resources/Private/Partials/
 
-		# cat=Charts/view/2020; type=string; label=Layout root path: Path to template layouts
+		# cat=Charts: Frontend/view/2020; type=string; label=Layout root path: Path to template layouts
+		layoutRootPath = EXT:sp_charts/Resources/Private/Layouts/
+	}
+}
+
+
+# ======================================================================
+# Backend configuration
+# ======================================================================
+module.tx_spcharts {
+	settings {
+		# cat=Charts: Backend/settings/1000; type=string; label=Chart Type: Default chart type
+		chartType =
+
+		# cat=Charts: Backend/settings/1010; type=string; label=Chart Setup: Default chart setup
+		chartSetup =
+
+		# cat=Charts: Backend/settings/1020; type=boolean; label=Hide Demo Data: Hide demo data, which is shown if "chartSetup" is empty
+		hideDemoData = 0
+	}
+
+	view {
+		# cat=Charts: Backend/view/2000; type=string; label=Template root path: Path to template root
+		templateRootPath = EXT:sp_charts/Resources/Private/Templates/
+
+		# cat=Charts: Backend/view/2010; type=string; label=Partial root path: Path to template partials
+		partialRootPath = EXT:sp_charts/Resources/Private/Partials/
+
+		# cat=Charts: Backend/view/2020; type=string; label=Layout root path: Path to template layouts
 		layoutRootPath = EXT:sp_charts/Resources/Private/Layouts/
 	}
 }

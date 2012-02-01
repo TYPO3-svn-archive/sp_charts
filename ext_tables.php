@@ -17,7 +17,7 @@
 	t3lib_extMgm::addPiFlexFormValue($identifier, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/Chart.xml');
 
 		// Add static TypoScript files
-	t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript/', 'Charts Configuration');
+	t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript/', 'Chart Configuration');
 
 		// Add plugin to new content element wizard
 	t3lib_extMgm::addPageTSConfig("

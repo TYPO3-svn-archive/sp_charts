@@ -105,7 +105,7 @@
 		 * @return void
 		 */
 		public function indexAction() {
-
+			// Nothing to do here, only for template output...
 		}
 
 
@@ -115,28 +115,7 @@
 		 * @return void
 		 */
 		public function showAction() {
-			$demoData = array(
-				array('AddThis',   180),
-				array('AddThis',   112),
-				array('Ask',       684),
-				array('Bluedot',   84),
-				array('Bluedot',   200),
-				array('Delicious', 480),
-				array('Delicidous', 480),
-				array('Deliscious', 480),
-				array('Delicdious', 480),
-				array('Delsicious', 480),
-				array('Delsicious', 480),
-				array('Delsicfious', 480),
-				array('Delicihous', 480),
-				array('Delficious', 480),
-				array('Delicious', 480),
-				array('Deliscious', 480),
-				array('Delgicious', 4860),
-				array('Deliecious', 4580),
-			);
-
-			$this->view->assign('data',     $demoData);
+			$this->view->assign('data', $this->getData($this->settings));
 			$this->view->assign('settings', $this->settings);
 		}
 

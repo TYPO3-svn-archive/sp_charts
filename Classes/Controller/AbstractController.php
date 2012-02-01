@@ -29,127 +29,55 @@
 	class Tx_SpCharts_Controller_AbstractController extends Tx_Extbase_MVC_Controller_ActionController {
 
 		/**
-		 * Set storagePid for persisting objects
-		 *
-		 * @param integer $storagePid New storagePid
-		 * @return void
+		 * Get configured data
+		 * 
+		 * @param array $settings The TypoScript setup
+		 * @return array The data to show
 		 */
-		protected function setStoragePid($storagePid) {
-			$configuration = $this->configurationManager->getConfiguration(
-				Tx_Extbase_Configuration_ConfigurationManager::CONFIGURATION_TYPE_FRAMEWORK
-			);
-			$configuration = Tx_Extbase_Utility_TypoScript::convertPlainArrayToTypoScriptArray($configuration);
-			$configuration['persistence.']['storagePid'] = (int) $storagePid;
-			$this->configurationManager->setConfiguration($configuration);
-		}
+		protected function getConfiguredData(array $settings) {
+			$data = array();
 
-
-		/**
-		 * Translate a label
-		 *
-		 * @param string $label Label to translate
-		 * @param array $arguments Optional arguments array
-		 * @return string Translated label
-		 */
-		protected function translate($label, array $arguments = NULL) {
-			$extensionKey = $this->request->getControllerExtensionKey();
-			return Tx_Extbase_Utility_Localization::translate($label, $extensionKey, $arguments);
-		}
-
-
-		/**
-		 * Add message to flash messages
-		 *
-		 * @param string $message Identifier of the message
-		 * @param array $arguments Optional array of arguments
-		 * @param string $severity optional severity code
-		 * @return void
-		 */
-		protected function addMessage($message, array $arguments = NULL, $severity = 'error') {
-			$constant = 't3lib_FlashMessage::' . strtoupper(trim($severity));
-			if (!empty($severity) && defined($constant)) {
-				$severity = constant($constant);
-			} else {
-				$severity = t3lib_FlashMessage::ERROR;
-			}
-			$this->flashMessageContainer->add($this->translate($message, $arguments), '', $severity);
-		}
-
-
-		/**
-		 * Send flash message and redirect to given action
-		 *
-		 * @param string $message Identifier of the message to send
-		 * @param string $action Name of the action
-		 * @param string $controller Optional name of the controller
-		 * @param array $arguments Optional array of arguments
-		 * @param integer $pageUid Optional UID of the page to redirect to
-		 * @param string $severity optional severity code
-		 * @return void
-		 */
-		protected function redirectWithMessage($message, $action, $controller = NULL, array $arguments = NULL, $pageUid = NULL, $severity = 'error') {
-			$this->addMessage($message, NULL, $severity);
-			$this->redirect($action, $controller, NULL, $arguments, $pageUid);
-		}
-
-
-		/**
-		 * Send flash message and forward to given action
-		 *
-		 * @param string $message Identifier of the message to send
-		 * @param string $action Name of the action
-		 * @param string $controller Optional name of the controller
-		 * @param array $arguments Optional array of arguments
-		 * @param string $severity optional severity code
-		 * @return void
-		 */
-		protected function forwardWithMessage($message, $action, $controller = NULL, array $arguments = NULL, $severity = 'error') {
-			$this->addMessage($message, NULL, $severity);
-			$this->forward($action, $controller, NULL, $arguments, $pageUid);
-		}
-
-
-		/**
-		 * Redirect to internal page
-		 *
-		 * @param integer $uid UID of the page
-		 * @param array $arguments Arguments to pass to the target page
-		 * @return void
-		 */
-		protected function redirectToPage($uid, array $arguments = array()) {
-			$this->uriBuilder->reset();
-			$this->uriBuilder->setTargetPageUid((int) $uid);
-			$uri = $this->uriBuilder->uriFor(NULL, $arguments);
-			$this->redirectToUri($uri);
-		}
-
-
-		/**
-		 * Redirects the web request to another uri.
-		 *
-		 * This overrides the original method and disables the prepending
-		 * of the base uri if uri already starts with "http"
-		 *
-		 * @param mixed $uri A string representation of a URI
-		 * @param integer $delay The delay in seconds
-		 * @param integer $statusCode The HTTP status code for the redirect
-		 * @return void
-		 * @see Tx_Extbase_MVC_Controller_AbstractController::redirectToURI
-		 */
-		protected function redirectToURI($uri, $delay = 0, $statusCode = 303) {
-			if (!$this->request instanceof Tx_Extbase_MVC_Web_Request) {
-				return;
+			if (!empty($settings['chartSetup']) && is_array($settings['chartSetup'])) {
+				foreach($settings['chartSetup'] as $set) {
+					if (!is_array($set)) {
+						throw new Exception('Chart setup is not well-formed');
+					}
+					$bars = array();
+					foreach ($set as $bar) {
+						if (!isset($bar['title'], $bar['value'])) {
+							throw new Exception('Chart setup for one bar is not well-formed');
+						}
+						$bars[] = array($bar['title'], $bar['value']);
+					}
+					$data[] = $bars;
+				}
 			}
 
-			if (strpos($uri, 'http') !== 0) {
-				$uri = $this->addBaseUriIfNecessary($uri);
+			return $data;
+		}
+
+
+		/**
+		 * Get all data to show in charts
+		 * 
+		 * @param array $settings The TypoScript setup
+		 * @return array The data to show
+		 */
+		protected function getData(array $settings) {
+			$data = $this->getConfiguredData($settings);
+
+				// Get demo data if configuration is empty
+			if (empty($data) && empty($settings['hideDemoData'])) {
+				$data = array(array(
+					array('Firefox',           380),
+					array('Internet Explorer', 312),
+					array('Google Chrome',     484),
+					array('Safari',            284),
+					array('Opera',             200),
+				));
 			}
 
-			$escapedUri = htmlentities($uri, ENT_QUOTES, 'utf-8');
-			$this->response->setContent('<html><head><meta http-equiv="refresh" content="' . intval($delay) . ';url=' . $escapedUri . '"/></head></html>');
-			$this->response->setStatus($statusCode);
-			$this->response->setHeader('Location', (string) $uri);
-			throw new Tx_Extbase_MVC_Exception_StopAction();
+			return $data;
 		}
 
 	}

@@ -25,6 +25,7 @@
 			<label index="title_bar">Bar</label>
 			<label index="title_column">Column</label>
 			<label index="title_donut">Donut</label>
+			<label index="title_line">Line</label>
 			<label index="title_pie">Pie</label>
 			<label index="select_page">Please select a page...</label>
 		</languageKey>
@@ -48,6 +49,7 @@
 			<label index="title_bar">Bar</label>
 			<label index="title_column">Column</label>
 			<label index="title_donut">Donut</label>
+			<label index="title_line">Line</label>
 			<label index="title_pie">Pie</label>
 			<label index="select_page">Bitte eine Seite auswählen...</label>
 		</languageKey>

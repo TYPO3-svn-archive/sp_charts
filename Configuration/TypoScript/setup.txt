@@ -6,7 +6,7 @@ plugin.tx_spcharts {
 	settings {
 		chartType        = {$plugin.tx_spcharts.settings.chartType}
 		chartSetup       = {$plugin.tx_spcharts.settings.chartSetup}
-		showDemoData     = {$plugin.tx_spcharts.settings.showDemoData}
+		hideDemoData     = {$plugin.tx_spcharts.settings.hideDemoData}
 	}
 
 	## View specific settings
@@ -65,26 +65,34 @@ plugin.tx_spcharts {
 module.tx_spcharts {
 	## General settings
 	settings {
+		chartType        = {$module.tx_spcharts.settings.chartType}
+		chartSetup       = {$module.tx_spcharts.settings.chartSetup}
+		hideDemoData     = {$module.tx_spcharts.settings.hideDemoData}
+
 		## Stylesheets
 		stylesheet {
-			jqplot       = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.css
-			chart        = EXT:sp_charts/Resources/Public/Stylesheet/Charts.css
+			jqplot         = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.css
+			chart          = EXT:sp_charts/Resources/Public/Stylesheet/Charts.css
 		}
 
 		## JavaScript libraries
 		javascript {
-			jquery       = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.min.js
-			jqplot1      = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.min.js
-			jqplot2      = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.barRenderer.min.js
-			jqplot3      = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pieRenderer.min.js
-			jqplot4      = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.donutRenderer.min.js
-			jqplot5      = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js
-			jqplot6      = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pointLabels.min.js
-			jqplot7      = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.highlighter.min.js
-			chart        = EXT:sp_charts/Resources/Public/Javascript/Chart.js
+			jquery         = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.min.js
+			jqplot1        = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.min.js
+			jqplot2        = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.barRenderer.min.js
+			jqplot3        = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pieRenderer.min.js
+			jqplot4        = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.donutRenderer.min.js
+			jqplot5        = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js
+			jqplot6        = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pointLabels.min.js
+			jqplot7        = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.highlighter.min.js
+			chart          = EXT:sp_charts/Resources/Public/Javascript/Chart.js
 		}
 	}
 
 	## View specific settings
-	view < plugin.tx_spcharts.view
+	view {
+		templateRootPath = {$module.tx_spcharts.view.templateRootPath}
+		partialRootPath  = {$module.tx_spcharts.view.partialRootPath}
+		layoutRootPath   = {$module.tx_spcharts.view.layoutRootPath}
+	}
 }

@@ -7,28 +7,41 @@
 	<h2><f:translate key="title" /></h2>
 	<div style="padding-top: 5px;"></div>
 
-	<h3 class="uppercase"><charts:spriteIcon name="spcharts-bar" />&nbsp;<f:translate key="title_bar" /></h3>
-	<charts:chart type="bar">{data}</charts:chart>
-	<br class="clear" />
+	<f:if condition="{settings.chartType}">
+		<f:then>
 
-	<div style="padding-top: 20px;"></div>
-	<h3 class="uppercase"><charts:spriteIcon name="spcharts-column" />&nbsp;<f:translate key="title_column" /></h3>
-	<charts:chart type="column">{data}</charts:chart>
-	<br class="clear" />
+			<h3 class="uppercase"><charts:spriteIcon name="spcharts-{settings.chartType}" />&nbsp;<f:translate key="title_{settings.chartType}" /></h3>
+			<charts:chart type="{settings.chartType}">{data}</charts:chart>
+			<br class="clear" />
 
-	<div style="padding-top: 20px;"></div>
-	<h3 class="uppercase"><charts:spriteIcon name="spcharts-donut" />&nbsp;<f:translate key="title_donut" /></h3>
-	<charts:chart type="donut">{data}</charts:chart>
-	<br class="clear" />
+		</f:then>
+		<f:else>
 
-	<div style="padding-top: 20px;"></div>
-	<h3 class="uppercase"><charts:spriteIcon name="spcharts-line" />&nbsp;<f:translate key="title_line" /></h3>
-	<charts:chart type="line">{data}</charts:chart>
-	<br class="clear" />
+			<h3 class="uppercase"><charts:spriteIcon name="spcharts-bar" />&nbsp;<f:translate key="title_bar" /></h3>
+			<charts:chart type="bar">{data}</charts:chart>
+			<br class="clear" />
 
-	<div style="padding-top: 20px;"></div>
-	<h3 class="uppercase"><charts:spriteIcon name="spcharts-pie" />&nbsp;<f:translate key="title_pie" /></h3>
-	<charts:chart type="pie">{data}</charts:chart>
-	<br class="clear" />
+			<div style="padding-top: 24px;"></div>
+			<h3 class="uppercase"><charts:spriteIcon name="spcharts-column" />&nbsp;<f:translate key="title_column" /></h3>
+			<charts:chart type="column">{data}</charts:chart>
+			<br class="clear" />
+
+			<div style="padding-top: 24px;"></div>
+			<h3 class="uppercase"><charts:spriteIcon name="spcharts-donut" />&nbsp;<f:translate key="title_donut" /></h3>
+			<charts:chart type="donut">{data}</charts:chart>
+			<br class="clear" />
+
+			<div style="padding-top: 24px;"></div>
+			<h3 class="uppercase"><charts:spriteIcon name="spcharts-line" />&nbsp;<f:translate key="title_line" /></h3>
+			<charts:chart type="line">{data}</charts:chart>
+			<br class="clear" />
+
+			<div style="padding-top: 24px;"></div>
+			<h3 class="uppercase"><charts:spriteIcon name="spcharts-pie" />&nbsp;<f:translate key="title_pie" /></h3>
+			<charts:chart type="pie">{data}</charts:chart>
+			<br class="clear" />
+
+		</f:else>
+	</f:if>
 
 </f:section>

@@ -50,36 +50,7 @@
 		 * @return void
 		 */
 		public function showAction() {
-				// Get data to show in chart
-			$data = array();
-			if (!empty($this->settings['chartSetup']) && is_array($this->settings['chartSetup'])) {
-				foreach($this->settings['chartSetup'] as $set) {
-					if (!is_array($set)) {
-						throw new Exception('Chart setup is not well-formed');
-					}
-					$bars = array();
-					foreach ($set as $bar) {
-						if (!isset($bar['title'], $bar['value'])) {
-							throw new Exception('Chart setup for one bar is not well-formed');
-						}
-						$bars[] = array($bar['title'], $bar['value']);
-					}
-					$data[] = $bars;
-				}
-			}
-
-				// Show demo data if empty
-			if (empty($data) && !empty($this->settings['showDemoData'])) {
-				$data = array(array(
-					array('Firefox', 180),
-					array('Internet Explorer', 112),
-					array('Google Chrome', 684),
-					array('Safari', 84),
-					array('Opera', 200),
-				));
-			}
-
-			$this->view->assign('data', $data);
+			$this->view->assign('data', $this->getData($this->settings));
 			$this->view->assign('settings', $this->settings);
 		}
 

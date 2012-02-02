@@ -38,17 +38,41 @@
 		 */
 		protected $initializedRenderers = array();
 
+		/**
+		 * @var t3lib_PageRenderer
+		 */
+		protected $pageRenderer;
+
+		/**
+		 * @var array
+		 */
+		protected $configuration = array();
+
 
 		/**
 		 * Initialize
-		 * 
+		 *
 		 * @return void
 		 */
 		public function __construct() {
+				// Get default configuration
+			if (!empty($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['sp_charts'])
+			 && is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['sp_charts'])) {
+				$this->configuration = $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['sp_charts'];
+			}
+
 				// Get all available renderers
-			if (!empty($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['sp_charts']['chartRenderers'])
-			 && is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['sp_charts']['chartRenderers'])) {
-				$this->availableRenderers = $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['sp_charts']['chartRenderers'];
+			if (!empty($this->configuration['chartRenderers']) && is_array($this->configuration['chartRenderers'])) {
+				$this->availableRenderers = $this->configuration['chartRenderers'];
+				unset($this->configuration['chartRenderers']);
+			}
+
+				// Get page renderer
+			if (!empty($GLOBALS['TSFE'])) {
+				$this->pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
+			} else if (class_exists('t3lib_PageRenderer')) {
+					// Get the singleton instance
+				$this->pageRenderer = t3lib_div::makeInstance('t3lib_PageRenderer');
 			}
 		}
 
@@ -67,15 +91,16 @@
 				return '';
 			}
 
+				// Merge with default configuration
+			$configuration = array_merge($this->configuration, $configuration);
+
 				// Get chart type
-			$type = 'bar';
-			if (!empty($configuration['type']) && !empty($configuration['type.'])) {
-				$type = $contentObject->stdWrap($configuration['type'], $configuration['type.']);
-			} else if (!empty($configuration['type']) && is_string($configuration['type'])) {
-				$type = $configuration['type'];
+			$type = $configuration['type'];
+			if (!empty($configuration['type.'])) {
+				$type = $contentObject->stdWrap($type, $configuration['type.']);
 			}
 
-				// Get renderer
+				// Get chart renderer
 			$renderer = $this->getRenderer($type);
 			if (empty($renderer)) {
 				return '';
@@ -83,7 +108,7 @@
 
 				// Equip renderer with required attributes
 			$renderer->setContentObject($contentObject);
-			$renderer->setPageRenderer($GLOBALS['TSFE']->getPageRenderer());
+			$renderer->setPageRenderer($this->pageRenderer);
 
 				// Get chart code
 			$content = $renderer->render($configuration);

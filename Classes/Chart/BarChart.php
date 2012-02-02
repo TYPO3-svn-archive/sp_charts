@@ -31,31 +31,11 @@
 		/**
 		 * @var array
 		 */
-		protected $cssFiles = array(
-			'jqplot'   => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.css',
-			'spcharts' => 'EXT:sp_charts/Resources/Public/Stylesheet/Charts.css',
-		);
-
-		/**
-		 * @var array
-		 */
-		protected $jsFiles = array(
-			'jquery'                      => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.min.js',
-			'jqplot'                      => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.min.js',
-			'jqplot_barRenderer'          => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.barRenderer.min.js',
-			'jqplot_categoryAxisRenderer' => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js',
-			'jqplot_pointLabels'          => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pointLabels.min.js',
-			'jqplot_highlighter'          => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.highlighter.min.js',
-			'spcharts'                    => 'EXT:sp_charts/Resources/Public/Javascript/Chart.js',
-		);
-
-		/**
-		 * @var array
-		 */
-		protected $colors = array(
-			'gridLine'   => '#B9B9B9',
-			'background' => '#F8F8F8',
-			'border'     => '#515151',
+		protected $plugins = array(
+			'barRenderer',
+			'categoryAxisRenderer',
+			'pointLabels',
+			'highlighter',
 		);
 
 		/**
@@ -70,7 +50,7 @@
 				rendererOptions: {
 					barDirection: \'horizontal\',
 					fillToZero: true,
-					barWidth: 15,
+					barWidth: %1$s,
 					shadowDepth: 3
 				},
 				shadowAngle: 135
@@ -81,10 +61,10 @@
 				}
 			},
 			grid: {
-				gridLineColor: \'%1$s\',
-				background: \'%2$s\',
-				borderColor: \'%3$s\',
-				borderWidth: 0.5,
+				gridLineColor: \'%2$s\',
+				background: \'%3$s\',
+				borderColor: \'%4$s\',
+				borderWidth: %5$s,
 				shadow: false
 			},
 			highlighter: {
@@ -99,20 +79,19 @@
 
 		/**
 		 * Build the chart options
-		 * 
+		 *
 		 * @param array $configuration TypoScript configuration
 		 * @return string Chart options
 		 */
 		protected function getChartOptions(array $configuration) {
-			$colors = $this->colors;
-			if (!empty($configuration['colors.']) && is_array($configuration['colors.'])) {
-				foreach ($configuration['colors.'] as $key => $color) {
-					if (!empty($configuration['colors.'][$key . '.']) && !empty($this->contentObject)) {
-						$colors[$key] = $this->contentObject->cObjGetSingle($color, $configuration['colors.'][$key . '.']);
-					}
-				}
-			}
-			return sprintf($this->options, $colors['gridLine'], $colors['background'], $colors['border']);
+			return sprintf(
+				$this->options,
+				$configuration['barWidth'],
+				$configuration['gridLineColor'],
+				$configuration['backgroundColor'],
+				$configuration['borderColor'],
+				$configuration['borderWidth']
+			);
 		}
 
 
@@ -120,41 +99,25 @@
 		 * Build the chart content
 		 *
 		 * @param array $configuration TypoScript configuration
-		 * @return array The chart content
+		 * @return string Chart content
 		 */
-		protected function getChartValues(array $configuration) {
-			if (empty($configuration['values.'])) {
+		protected function getChartContent(array $configuration) {
+			if (empty($configuration['sets.']) || !is_array($configuration['sets.'])) {
 				return array();
 			}
 
-			print_r('<pre>');print_r($configuration);die('</pre>');
-
-/*
+				// Get all sets
 			$sets = array();
-
-				// Get sets
-			foreach ($data as $set) {
-				$bars = array();
-				foreach ($set as $bar) {
-					if (!isset($bars[$bar[0]])) {
-						$bars[$bar[0]] = (int) $bar[1];
-					} else {
-						$bars[$bar[0]] += (int) $bar[1];
-					}
-				}
-
-				krsort($bars);
-
+			foreach ($configuration['sets.'] as $lines) {
+				$lines = array_reverse($lines, TRUE);
 				$set = array();
-				foreach ($bars as $key => $value) {
-					$set[] = array($value, $key);
+				foreach ($lines as $title => $value) {
+					$set[] = array($value, $title);
 				}
-
 				$sets[] = $set;
 			}
 
 			return $sets;
-*/
 		}
 
 	}

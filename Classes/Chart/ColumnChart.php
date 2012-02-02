@@ -31,31 +31,11 @@
 		/**
 		 * @var array
 		 */
-		protected $cssFiles = array(
-			'jqplot'   => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.css',
-			'spcharts' => 'EXT:sp_charts/Resources/Public/Stylesheet/Charts.css',
-		);
-
-		/**
-		 * @var array
-		 */
-		protected $jsFiles = array(
-			'jquery'                      => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.min.js',
-			'jqplot'                      => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.min.js',
-			'jqplot_barRenderer'          => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.barRenderer.min.js',
-			'jqplot_categoryAxisRenderer' => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js',
-			'jqplot_pointLabels'          => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pointLabels.min.js',
-			'jqplot_highlighter'          => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.highlighter.min.js',
-			'spcharts'                    => 'EXT:sp_charts/Resources/Public/Javascript/Chart.js',
-		);
-
-		/**
-		 * @var array
-		 */
-		protected $colors = array(
-			'gridLine'   => '#B9B9B9',
-			'background' => '#F8F8F8',
-			'border'     => '#515151',
+		protected $plugins = array(
+			'barRenderer',
+			'categoryAxisRenderer',
+			'pointLabels',
+			'highlighter',
 		);
 
 		/**
@@ -69,21 +49,21 @@
 				},
 				rendererOptions: {
 					fillToZero: true,
-					barWidth: 25,
+					barWidth: %1$s,
 					shadowDepth: 3
 				}
 			},
 			axes: {
 				xaxis: {
 					renderer: jQuery.jqplot.CategoryAxisRenderer,
-					ticks: %4$s
+					ticks: %2$s
 				}
 			},
 			grid: {
-				gridLineColor: \'%1$s\',
-				background: \'%2$s\',
-				borderColor: \'%3$s\',
-				borderWidth: 0.5,
+				gridLineColor: \'%3$s\',
+				background: \'%4$s\',
+				borderColor: \'%5$s\',
+				borderWidth: %6$s,
 				shadow: false
 			},
 			highlighter: {
@@ -98,20 +78,27 @@
 
 		/**
 		 * Build the chart options
-		 * 
+		 *
 		 * @param array $configuration TypoScript configuration
 		 * @return string Chart options
 		 */
 		protected function getChartOptions(array $configuration) {
-			$colors = $this->colors;
-			if (!empty($configuration['colors.']) && is_array($configuration['colors.'])) {
-				foreach ($configuration['colors.'] as $key => $color) {
-					if (!empty($configuration['colors.'][$key . '.']) && !empty($this->contentObject)) {
-						$colors[$key] = $this->contentObject->cObjGetSingle($color, $configuration['colors.'][$key . '.']);
-					}
-				}
+				// Get titles from first set of lines
+			$titles = '[]';
+			if (!empty($configuration['sets.']) && is_array($configuration['sets.'])) {
+				$firstSet = reset($configuration['sets.']);
+				$titles = json_encode(array_keys($firstSet));
 			}
-			return sprintf($this->options, $colors['gridLine'], $colors['background'], $colors['border']);
+
+			return sprintf(
+				$this->options,
+				$configuration['barWidth'],
+				$titles,
+				$configuration['gridLineColor'],
+				$configuration['backgroundColor'],
+				$configuration['borderColor'],
+				$configuration['borderWidth']
+			);
 		}
 
 
@@ -119,50 +106,21 @@
 		 * Build the chart content
 		 *
 		 * @param array $configuration TypoScript configuration
-		 * @return array The chart content
+		 * @return string Chart content
 		 */
-		protected function getChartValues(array $configuration) {
-			if (empty($configuration['values.'])) {
+		protected function getChartContent(array $configuration) {
+			if (empty($configuration['sets.']) || !is_array($configuration['sets.'])) {
 				return array();
 			}
 
-			die('TODO: ' . get_class($this));
-
-/*
-			$titles = array();
+				// Get all sets
 			$sets = array();
-
-				// Get sets
-			foreach ($data as $set) {
-				$bars = array();
-				foreach ($set as $bar) {
-					if (!isset($bars[$bar[0]])) {
-						$bars[$bar[0]] = (int) $bar[1];
-					} else {
-						$bars[$bar[0]] += (int) $bar[1];
-					}
-				}
-
-				ksort($bars);
-
-				if (empty($titles)) {
-					$titles = array_keys($bars);
-				}
-
-				$sets[] = array_values($bars);
+			foreach ($configuration['sets.'] as $lines) {
+				$lines = array_reverse($lines, TRUE);
+				$sets[] = array_values($lines);
 			}
 
-				// Get options
-			$options = sprintf(
-				$this->options,
-				$this->colors['gridLine'],
-				$this->colors['background'],
-				$this->colors['border'],
-				json_encode($titles)
-			);
-
-			return $this->renderChart($sets, $options);
-*/
+			return $sets;
 		}
 
 	}

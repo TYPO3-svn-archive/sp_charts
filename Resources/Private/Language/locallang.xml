@@ -6,11 +6,11 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="plugin.title">Charts</label>
-			<label index="plugin.description">Adds a charts renderer to this page.</label>
-			<label index="module.title">Charts demo</label>
-			<label index="mlang_tabs_tab">Charts demo</label>
-			<label index="mlang_labels_tabdescr">Charts demo</label>
+			<label index="plugin.title">Chart</label>
+			<label index="plugin.description">Adds a chart to this page.</label>
+			<label index="module.title">Chart</label>
+			<label index="mlang_tabs_tab">Chart</label>
+			<label index="mlang_labels_tabdescr">Chart</label>
 
 			<label index="tt_content.flexform_pi1.s_def">General</label>
 			<label index="tt_content.flexform_pi1.s_def.chartType">Chart type</label>
@@ -32,10 +32,10 @@
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="plugin.title">Diagramm</label>
-			<label index="plugin.description">Fügt der aktuellen Seite eine Diagramm-Darstellung hinzu.</label>
-			<label index="module.title">Diagramm-Demo</label>
-			<label index="mlang_tabs_tab">Diagramm-Demo</label>
-			<label index="mlang_labels_tabdescr">Diagramm-Demo</label>
+			<label index="plugin.description">Fügt der aktuellen Seite ein Diagramm hinzu.</label>
+			<label index="module.title">Diagramm</label>
+			<label index="mlang_tabs_tab">Diagramm</label>
+			<label index="mlang_labels_tabdescr">Diagramm</label>
 
 			<label index="tt_content.flexform_pi1.s_def">Allgemein</label>
 			<label index="tt_content.flexform_pi1.s_def.chartType">Diagramm-Typ</label>

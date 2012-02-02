@@ -29,6 +29,36 @@
 	class Tx_SpCharts_Chart_DonutChart extends Tx_SpCharts_Chart_AbstractChart {
 
 		/**
+		 * @var array
+		 */
+		protected $cssFiles = array(
+			'jqplot'   => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.css',
+			'spcharts' => 'EXT:sp_charts/Resources/Public/Stylesheet/Charts.css',
+		);
+
+		/**
+		 * @var array
+		 */
+		protected $jsFiles = array(
+			'jquery'                      = 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.min.js',
+			'jqplot'                      = 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.min.js',
+			'jqplot_donutRenderer'        = 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.donutRenderer.min.js',
+			'jqplot_categoryAxisRenderer' = 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js',
+			'jqplot_pointLabels'          = 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pointLabels.min.js',
+			'jqplot_highlighter'          = 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.highlighter.min.js',
+			'spcharts'                    = 'EXT:sp_charts/Resources/Public/Javascript/Chart.js',
+		);
+
+		/**
+		 * @var array
+		 */
+		protected $colors = array(
+			'gridLine'   => '#B9B9B9',
+			'background' => '#F8F8F8',
+			'border'     => '#515151',
+		);
+
+		/**
 		 * @var string
 		 */
 		protected $options = '
@@ -60,12 +90,38 @@
 
 
 		/**
-		 * Render the chart
-		 *
-		 * @param array $values The data to show
-		 * @return string The rendered chart
+		 * Build the chart options
+		 * 
+		 * @param array $configuration TypoScript configuration
+		 * @return string Chart options
 		 */
-		public function render($data) {
+		protected function getChartOptions(array $configuration) {
+			$colors = $this->colors;
+			if (!empty($configuration['colors.']) && is_array($configuration['colors.'])) {
+				foreach ($configuration['colors.'] as $key => $color) {
+					if (!empty($configuration['colors.'][$key . '.']) && !empty($this->contentObject)) {
+						$colors[$key] = $this->contentObject->cObjGetSingle($color, $configuration['colors.'][$key . '.']);
+					}
+				}
+			}
+			return sprintf($this->options, $colors['gridLine'], $colors['background'], $colors['border']);
+		}
+
+
+		/**
+		 * Build the chart content
+		 *
+		 * @param array $configuration TypoScript configuration
+		 * @return array The chart content
+		 */
+		protected function getChartValues(array $configuration) {
+			if (empty($configuration['values.'])) {
+				return array();
+			}
+
+			die('TODO: ' . get_class($this));
+
+/*
 			$sets = array();
 
 				// Get sets
@@ -97,6 +153,7 @@
 			);
 
 			return $this->renderChart($sets, $options);
+*/
 		}
 
 	}

@@ -9,6 +9,7 @@
 		'tx_spcharts_chart_donutchart'                        => $extensionClassesPath . 'Chart/DonutChart.php',
 		'tx_spcharts_chart_linechart'                         => $extensionClassesPath . 'Chart/LineChart.php',
 		'tx_spcharts_chart_piechart'                          => $extensionClassesPath . 'Chart/PieChart.php',
+		'tx_spcharts_content_chart'                           => $extensionClassesPath . 'Content/Chart.php',
 		'tx_spcharts_controller_abstractcontroller'           => $extensionClassesPath . 'Controller/AbstractController.php',
 		'tx_spcharts_controller_backendcontroller'            => $extensionClassesPath . 'Controller/BackendController.php',
 		'tx_spcharts_controller_frontendcontroller'           => $extensionClassesPath . 'Controller/FrontendController.php',

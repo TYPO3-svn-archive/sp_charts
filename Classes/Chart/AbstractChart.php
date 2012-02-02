@@ -29,75 +29,114 @@
 	abstract class Tx_SpCharts_Chart_AbstractChart implements Tx_SpCharts_Chart_ChartInterface {
 
 		/**
-		 * @var array
+		 * @var tslib_cObj
 		 */
-		protected $colors = array(
-			'gridLine'   => '#B9B9B9',
-			'background' => '#F8F8F8',
-			'border'     => '#515151',
-		);
+		protected $contentObject;
+
+		/**
+		 * @var t3lib_PageRenderer
+		 */
+		protected $pageRenderer;
 
 		/**
 		 * @var array
 		 */
-		protected $settings = array();
+		protected $cssFiles = array();
+
+		/**
+		 * @var array
+		 */
+		protected $jsFiles = array();
 
 		/**
 		 * @var string
 		 */
-		protected $defaultChartTag = '
-			<div class="spcharts-chart spcharts-chart-%1$s" id="%2$s"></div>
+		protected $html = '
+			<div class="spcharts-chart spcharts-chart-%1$s" id="spcharts-chart-%2$s"></div>
 			<script type="text/javascript">
-				charts[\'%2$s\'] = {
+				charts[\'spcharts-chart-%2$s\'] = {
 					data: %3$s,
 					options: {%4$s}
 				};
 			</script>
 		';
 
-		/**
-		 * @var string
-		 */
-		protected $defaultChartId = 'spcharts-chart-%s';
-
 
 		/**
-		 * Set configuration
+		 * Set content object
 		 *
-		 * @param array $settings The TypoScript settings
+		 * @param tslib_cObj $contentObject The content object
 		 * @return void
 		 */
-		public function setConfiguration(array $settings) {
-			$this->settings = $settings;
-
-				// Override colors
-			if (!empty($this->settings['colors']) && is_array($this->settings['colors'])) {
-				foreach ($this->settings['colors'] as $key => $value) {
-					$this->colors[$key] = '#' . ltrim($value, '#');
-				}
-			}
+		public function setContentObject(tslib_cObj $contentObject) {
+			$this->contentObject = $contentObject;
 		}
 
 
 		/**
-		 * Build the chart code
+		 * Set page renderer
 		 *
-		 * @param array $data The chart data
-		 * @param string $options Additional options
-		 * @return string Rendered chart code
+		 * @param array $pageRenderer The page renderer
+		 * @return void
 		 */
-		protected function renderChart(array $data, $options = '') {
-			if (empty($data)) {
-				return '';
+		public function setPageRenderer(t3lib_PageRenderer $pageRenderer) {
+			$this->pageRenderer = $pageRenderer;
+		}
+
+
+		/**
+		 * Render the chart
+		 *
+		 * @param array $configuration TypoScript configuration
+		 * @return string The rendered chart
+		 */
+		public function render(array $configuration) {
+				// Add CSS files to page renderer
+			if (!empty($this->cssFiles) && !empty($this->pageRenderer)) {
+				foreach($this->cssFiles as $key => $fileName) {
+					$fileName = str_replace(PATH_site, '', t3lib_div::getFileAbsFileName($fileName));
+					$this->pageRenderer->addCssFile($fileName);
+				}
 			}
 
+				// Add JS files to page renderer
+			if (!empty($this->jsFiles) && !empty($this->pageRenderer)) {
+				$files = array_reverse($this->jsFiles);
+				foreach($files as $key => $fileName) {
+					$fileName = str_replace(PATH_site, '', t3lib_div::getFileAbsFileName($fileName));
+					$this->pageRenderer->addJsLibrary($key, $fileName, 'text/javascript', FALSE, TRUE);
+				}
+			}
+
+				// Get chart type
 			$type = substr(strtolower(get_class($this)), 0, -5);
 			$type = substr($type, strrpos($type, '_') + 1);
-			$id = sprintf($this->defaultChartId, uniqid());
-			$data = json_encode($data);
 
-			return sprintf($this->defaultChartTag, $type, $id, $data, $options);
+				// Get chart
+			$options = $this->getChartOptions($configuration);
+			$values  = $this->getChartValues($configuration);
+			$values  = json_encode($values);
+
+			return sprintf($this->html, $type, uniqid(), $values, $options);
 		}
+
+
+		/**
+		 * Build the chart options
+		 * 
+		 * @param array $configuration TypoScript configuration
+		 * @return string Chart options
+		 */
+		abstract protected function getChartOptions(array $configuration);
+
+
+		/**
+		 * Build the chart options
+		 * 
+		 * @param array $configuration TypoScript configuration
+		 * @return string Chart options
+		 */
+		abstract protected function getChartValues(array $configuration);
 
 	}
 ?>

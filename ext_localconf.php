@@ -13,6 +13,10 @@
 		array()
 	);
 
+		// Add new content element
+	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['cObjTypeAndClass'][] =
+		array('CHART', 'Tx_SpCharts_Content_Chart');
+
 		// Define renderers for the charts
 	if (empty($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$_EXTKEY]['chartRenderers'])) {
 		$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][$_EXTKEY]['chartRenderers'] = array();

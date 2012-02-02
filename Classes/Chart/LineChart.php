@@ -40,12 +40,12 @@
 		 * @var array
 		 */
 		protected $jsFiles = array(
-			'jquery'                      = 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.min.js',
-			'jqplot'                      = 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.min.js',
-			'jqplot_categoryAxisRenderer' = 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js',
-			'jqplot_pointLabels'          = 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pointLabels.min.js',
-			'jqplot_highlighter'          = 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.highlighter.min.js',
-			'spcharts'                    = 'EXT:sp_charts/Resources/Public/Javascript/Chart.js',
+			'jquery'                      => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.min.js',
+			'jqplot'                      => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.min.js',
+			'jqplot_categoryAxisRenderer' => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js',
+			'jqplot_pointLabels'          => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pointLabels.min.js',
+			'jqplot_highlighter'          => 'EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.highlighter.min.js',
+			'spcharts'                    => 'EXT:sp_charts/Resources/Public/Javascript/Chart.js',
 		);
 
 		/**

@@ -29,30 +29,21 @@
 	interface Tx_SpCharts_Chart_ChartInterface extends t3lib_Singleton {
 
 		/**
-		 * Set content object
+		 * Returns an array of required plugins
 		 *
-		 * @param tslib_cObj $contentObject The content object
-		 * @return void
+		 * @return array Plugin names
 		 */
-		public function setContentObject(tslib_cObj $contentObject);
-
-
-		/**
-		 * Set page renderer
-		 *
-		 * @param array $pageRenderer The page renderer
-		 * @return void
-		 */
-		public function setPageRenderer(t3lib_PageRenderer $pageRenderer);
+		public function getPlugins();
 
 
 		/**
 		 * Render the chart
 		 *
+		 * @param array $sets The sets to render
 		 * @param array $configuration TypoScript configuration
 		 * @return string The rendered chart
 		 */
-		public function render(array $configuration);
+		public function render(array $sets, array $configuration);
 
 	}
 ?>

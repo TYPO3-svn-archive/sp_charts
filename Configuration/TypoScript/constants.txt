@@ -3,36 +3,47 @@
 # ======================================================================
 plugin.tx_spcharts {
 	settings {
-		# cat=Charts: Frontend/settings/1000; type=string; label=Chart Type: Default chart type
-		chartType =
+		# cat=Charts: Frontend/settings/1000; type=string; label=Type: Default chart type
+		type = line
 
-		# cat=Charts: Frontend/settings/1010; type=string; label=Chart Setup: Default chart setup
-		chartSetup =
+		# cat=Charts: Frontend/settings/1010; type=boolean; label=Disable jQuery JavaScript: Disable the loading of the provided jQuery library
+		disableJQueryJs = 0
 
-		# cat=Charts: Frontend/settings/1020; type=boolean; label=Hide Demo Data: Hide demo data, which is shown if "chartSetup" is empty
-		hideDemoData = 0
+		# cat=Charts: Frontend/settings/1020; type=boolean; label=Disable jqPlot JavaScript: Disable the loading of the provided jqPlot library
+		disableJqPlotJs = 0
 
-		colors {
-			# cat=Charts: Frontend/settings/1100; type=string; label=Grid Line Color: Color for the lines in grid
-			gridLine = #B9B9B9
+		# cat=Charts: Frontend/settings/1030; type=boolean; label=Disable Chart JavaScript: Disable the loading of the provided chart JavaScript
+		disableChartJs = 0
 
-			# cat=Charts: Frontend/settings/1110; type=string; label=Background Color: Color for the chart background
-			background = #FFFFFF
+		# cat=Charts: Frontend/settings/1040; type=string; label=JavaScript Root Path: The path to the JavaScript libraries
+		jsRootPath = EXT:sp_charts/Resources/Public/Javascript/
 
-			# cat=Charts: Frontend/settings/1120; type=string; label=Border Color: Color for the grid border
-			border = #515151
-		}
+		# cat=Charts: Frontend/settings/1050; type=string; label=Grid Line Color: Color of the lines in grids
+		gridLineColor = #B9B9B9
 
-		libraries {
-			# cat=Charts: Frontend/settings/1200; type=boolean; label=Load jQuery: Load jQuery library
-			jquery = 1
+		# cat=Charts: Frontend/settings/1060; type=string; label=Background Color: Color of the chart background area
+		backgroundColor = #F8F8F8
 
-			# cat=Charts: Frontend/settings/1210; type=boolean; label=Load jqPlot: Load jqPlot library
-			jqplot = 1
+		# cat=Charts: Frontend/settings/1070; type=string; label=Border Color: Color of the grid border
+		borderColor = #515151
 
-			# cat=Charts: Frontend/settings/1220; type=boolean; label=Load Chart Setup: Load default chart setup
-			charts = 1
-		}
+		# cat=Charts: Frontend/settings/1080; type=string; label=Border Width: With of the grid border
+		borderWidth = 0.5
+
+		# cat=Charts: Frontend/settings/1090; type=int; label=Bar Width: Width of the bars in bar or column chart
+		barWidth = 15
+
+		# cat=Charts: Frontend/settings/1100; type=string; label=Line Width: Width of the lines in line chart
+		lineWidth = 2.5
+
+		# cat=Charts: Frontend/settings/1110; type=boolean; label=Show Legend: Show a legend beside pie and donut chart
+		showLegend = 1
+
+		# cat=Charts: Frontend/settings/1120; type=string; label=Equal Sign: Sign between title and value in set configuration
+		equalSign = =
+
+		# cat=Charts: Frontend/settings/1130; type=string; label=Seperator: Sign between two title / value combinations in set configuration
+		separator = ;
 	}
 
 	view {
@@ -53,25 +64,50 @@ plugin.tx_spcharts {
 # ======================================================================
 module.tx_spcharts {
 	settings {
-		# cat=Charts: Backend/settings/1000; type=string; label=Chart Type: Default chart type
-		chartType =
+		# cat=Charts: Backend/settings/1020; type=boolean; label=Disable Demo Sets: Disable the demo sets in backend module
+		disableDemoSets = 0
 
-		# cat=Charts: Backend/settings/1010; type=string; label=Chart Setup: Default chart setup
-		chartSetup =
+		# cat=Charts: Backend/settings/1010; type=string; label=Type: Default chart type
+		type =
 
-		# cat=Charts: Backend/settings/1020; type=boolean; label=Hide Demo Data: Hide demo data, which is shown if "chartSetup" is empty
-		hideDemoData = 0
+		# cat=Charts: Backend/settings/1020; type=boolean; label=Disable jQuery JavaScript: Disable the loading of the provided jQuery library
+		disableJQueryJs = 0
 
-		colors {
-			# cat=Charts: Backend/settings/1100; type=string; label=Grid Line Color: Color for the lines in grid
-			gridLine = #B9B9B9
+		# cat=Charts: Backend/settings/1030; type=boolean; label=Disable jqPlot JavaScript: Disable the loading of the provided jqPlot library
+		disableJqPlotJs = 0
 
-			# cat=Charts: Backend/settings/1110; type=string; label=Background Color: Color for the chart background
-			background = #F8F8F8
+		# cat=Charts: Backend/settings/1040; type=boolean; label=Disable Chart JavaScript: Disable the loading of the provided chart JavaScript
+		disableChartJs = 0
 
-			# cat=Charts: Backend/settings/1120; type=string; label=Border Color: Color for the grid border
-			border = #515151
-		}
+		# cat=Charts: Backend/settings/1050; type=string; label=JavaScript Root Path: The path to the JavaScript libraries
+		jsRootPath = EXT:sp_charts/Resources/Public/Javascript/
+
+		# cat=Charts: Backend/settings/1060; type=string; label=Grid Line Color: Color of the lines in grids
+		gridLineColor = #B9B9B9
+
+		# cat=Charts: Backend/settings/1070; type=string; label=Background Color: Color of the chart background area
+		backgroundColor = #F8F8F8
+
+		# cat=Charts: Backend/settings/1080; type=string; label=Border Color: Color of the grid border
+		borderColor = #515151
+
+		# cat=Charts: Backend/settings/1090; type=string; label=Border Width: With of the grid border
+		borderWidth = 0.5
+
+		# cat=Charts: Backend/settings/1100; type=int; label=Bar Width: Width of the bars in bar or column chart
+		barWidth = 15
+
+		# cat=Charts: Backend/settings/1110; type=string; label=Line Width: Width of the lines in line chart
+		lineWidth = 2.5
+
+		# cat=Charts: Backend/settings/1120; type=boolean; label=Show Legend: Show a legend beside pie and donut chart
+		showLegend = 1
+
+		# cat=Charts: Backend/settings/1130; type=string; label=Equal Sign: Sign between title and value in set configuration
+		equalSign = =
+
+		# cat=Charts: Backend/settings/1140; type=string; label=Seperator: Sign between two title / value combinations in set configuration
+		separator = ;
 	}
 
 	view {

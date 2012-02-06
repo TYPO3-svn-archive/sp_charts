@@ -4,15 +4,24 @@
 plugin.tx_spcharts {
 	## General settings
 	settings {
-		chartType        = {$plugin.tx_spcharts.settings.chartType}
-		chartSetup       = {$plugin.tx_spcharts.settings.chartSetup}
-		hideDemoData     = {$plugin.tx_spcharts.settings.hideDemoData}
+		type             = {$plugin.tx_spcharts.settings.type}
+		disableJQueryJs  = {$plugin.tx_spcharts.settings.disableJQueryJs}
+		disableJqPlotJs  = {$plugin.tx_spcharts.settings.disableJqPlotJs}
+		disableChartJs   = {$plugin.tx_spcharts.settings.disableChartJs}
+		jsRootPath       = {$plugin.tx_spcharts.settings.jsRootPath}
+		gridLineColor    = {$plugin.tx_spcharts.settings.gridLineColor}
+		backgroundColor  = {$plugin.tx_spcharts.settings.backgroundColor}
+		borderColor      = {$plugin.tx_spcharts.settings.borderColor}
+		borderWidth      = {$plugin.tx_spcharts.settings.borderWidth}
+		barWidth         = {$plugin.tx_spcharts.settings.barWidth}
+		lineWidth        = {$plugin.tx_spcharts.settings.lineWidth}
+		showLegend       = {$plugin.tx_spcharts.settings.showLegend}
+		equalSign        = {$plugin.tx_spcharts.settings.equalSign}
+		separator        = {$plugin.tx_spcharts.settings.separator}
 
-		## Chart colors
-		colors {
-			gridLine       = {$plugin.tx_spcharts.settings.colors.gridLine}
-			background     = {$plugin.tx_spcharts.settings.colors.background}
-			border         = {$plugin.tx_spcharts.settings.colors.border}
+		## Define some sets
+		sets {
+
 		}
 	}
 
@@ -22,39 +31,18 @@ plugin.tx_spcharts {
 		partialRootPath  = {$plugin.tx_spcharts.view.partialRootPath}
 		layoutRootPath   = {$plugin.tx_spcharts.view.layoutRootPath}
 	}
+
+	## Default styles
+	_CSS_DEFAULT_STYLE (
+		div.sp_charts br.clear { clear: both; float: none; height: 0px; line-height: 0px; padding: 0; margin: 0; border: none; }
+		div.spcharts-chart { width: 100%; }
+		div.spcharts-chart div.jqplot-highlighter-tooltip { background: #FFFFFF; color: #515151; padding: 0 5px; font-size: 11px; border: 1px solid #515151; -webkit-box-shadow: 2px 2px 3px rgba(120,120,120,0.5); -moz-box-shadow: 2px 2px 3px rgba(120,120,120,0.5); box-shadow: 2px 2px 3px rgba(120,120,120,0.5); }
+		div.spcharts-chart-bar { height: 440px; }
+		div.spcharts-chart-column { height: 220px; }
+		div.spcharts-chart-pie { height: 280px; width: 30%; float: left; }
+		div.spcharts-chart-donut { height: 280px; width: 30%; float: left; }
+	)
 }
-
-
-## Include jQuery library
-[globalVar = LIT:1 = {$plugin.tx_spcharts.settings.libraries.jquery}]
-	plugin.tx_spcharts.settings {
-		javascript.jquery = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.min.js
-	}
-[global]
-
-
-## Include jqPlot library
-[globalVar = LIT:1 = {$plugin.tx_spcharts.settings.libraries.jqplot}]
-	plugin.tx_spcharts.settings {
-		stylesheet.jqplot  = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.css
-		javascript.jqplot1 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.min.js
-		javascript.jqplot2 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.barRenderer.min.js
-		javascript.jqplot3 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pieRenderer.min.js
-		javascript.jqplot4 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.donutRenderer.min.js
-		javascript.jqplot5 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js
-		javascript.jqplot6 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pointLabels.min.js
-		javascript.jqplot7 = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.highlighter.min.js
-	}
-[global]
-
-
-## Include default chart setup
-[globalVar = LIT:1 = {$plugin.tx_spcharts.settings.libraries.charts}]
-	plugin.tx_spcharts.settings {
-		stylesheet.charts = EXT:sp_charts/Resources/Public/Stylesheet/Charts.css
-		javascript.charts = EXT:sp_charts/Resources/Public/Javascript/Chart.js
-	}
-[global]
 
 
 # ======================================================================
@@ -63,34 +51,25 @@ plugin.tx_spcharts {
 module.tx_spcharts {
 	## General settings
 	settings {
-		chartType        = {$module.tx_spcharts.settings.chartType}
-		chartSetup       = {$module.tx_spcharts.settings.chartSetup}
-		hideDemoData     = {$module.tx_spcharts.settings.hideDemoData}
+		disableDemoSets  = {$module.tx_spcharts.settings.disableDemoSets}
+		type             = {$module.tx_spcharts.settings.type}
+		disableJQueryJs  = {$module.tx_spcharts.settings.disableJQueryJs}
+		disableJqPlotJs  = {$module.tx_spcharts.settings.disableJqPlotJs}
+		disableChartJs   = {$module.tx_spcharts.settings.disableChartJs}
+		jsRootPath       = {$module.tx_spcharts.settings.jsRootPath}
+		gridLineColor    = {$module.tx_spcharts.settings.gridLineColor}
+		backgroundColor  = {$module.tx_spcharts.settings.backgroundColor}
+		borderColor      = {$module.tx_spcharts.settings.borderColor}
+		borderWidth      = {$module.tx_spcharts.settings.borderWidth}
+		barWidth         = {$module.tx_spcharts.settings.barWidth}
+		lineWidth        = {$module.tx_spcharts.settings.lineWidth}
+		showLegend       = {$module.tx_spcharts.settings.showLegend}
+		equalSign        = {$module.tx_spcharts.settings.equalSign}
+		separator        = {$module.tx_spcharts.settings.separator}
 
-		## Chart colors
-		colors {
-			gridLine       = {$module.tx_spcharts.settings.colors.gridLine}
-			background     = {$module.tx_spcharts.settings.colors.background}
-			border         = {$module.tx_spcharts.settings.colors.border}
-		}
+		## Define some sets
+		sets {
 
-		## Stylesheets
-		stylesheet {
-			jqplot         = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.css
-			chart          = EXT:sp_charts/Resources/Public/Stylesheet/Charts.css
-		}
-
-		## JavaScript libraries
-		javascript {
-			jquery         = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.min.js
-			jqplot1        = EXT:sp_charts/Resources/Public/Javascript/jqPlot/jquery.jqplot.min.js
-			jqplot2        = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.barRenderer.min.js
-			jqplot3        = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pieRenderer.min.js
-			jqplot4        = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.donutRenderer.min.js
-			jqplot5        = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js
-			jqplot6        = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.pointLabels.min.js
-			jqplot7        = EXT:sp_charts/Resources/Public/Javascript/jqPlot/plugins/jqplot.highlighter.min.js
-			chart          = EXT:sp_charts/Resources/Public/Javascript/Chart.js
 		}
 	}
 
@@ -100,4 +79,7 @@ module.tx_spcharts {
 		partialRootPath  = {$module.tx_spcharts.view.partialRootPath}
 		layoutRootPath   = {$module.tx_spcharts.view.layoutRootPath}
 	}
+
+	## Default styles
+	_CSS_DEFAULT_STYLE < plugin.tx_spcharts._CSS_DEFAULT_STYLE
 }

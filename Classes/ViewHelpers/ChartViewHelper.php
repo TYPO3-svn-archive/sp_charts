@@ -46,16 +46,16 @@
 		/**
 		 * Renders a chart
 		 *
-		 * @param array $data The rows and cols to show
+		 * @param array $sets The sets of lines to render
 		 * @param string $type The type of chart to render
+		 * @param array $configuration Configuration for the chart renderer
 		 * @return string The rendered chart
 		 */
-		public function render($data = NULL, $type = 'bar') {
-			if ($data === NULL) {
-				$data = $this->renderChildren();
+		public function render($sets = NULL, $type = 'bar', array $configuration = array()) {
+			if ($sets === NULL) {
+				$sets = $this->renderChildren();
 			}
-
-			return $this->chartService->renderChart($type, $data);
+			return $this->chartService->renderChart($sets, $type, $configuration);
 		}
 
 	}

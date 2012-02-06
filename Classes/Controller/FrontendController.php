@@ -38,8 +38,9 @@
 			$this->settings = Tx_SpCharts_Utility_TypoScript::parse($this->settings);
 
 				// Parse chart setup in plugin settings
-			if (!empty($this->settings['chartSetup']) && is_string($this->settings['chartSetup'])) {
-				$this->settings['chartSetup'] = Tx_SpCharts_Utility_TypoScript::parseTypoScriptString($this->settings['chartSetup']);
+			if (!empty($this->settings['flexformSets']) && is_string($this->settings['flexformSets'])) {
+				$this->settings['sets'] = Tx_SpCharts_Utility_TypoScript::parseTypoScriptString($this->settings['flexformSets']);
+				unset($this->settings['flexformSets']);
 			}
 		}
 
@@ -50,7 +51,7 @@
 		 * @return void
 		 */
 		public function showAction() {
-			$this->view->assign('data', $this->getData($this->settings));
+			$this->view->assign('sets', $this->getSets());
 			$this->view->assign('settings', $this->settings);
 		}
 

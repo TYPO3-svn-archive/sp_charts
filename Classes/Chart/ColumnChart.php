@@ -79,25 +79,24 @@
 		/**
 		 * Build the chart options
 		 *
-		 * @param array $configuration TypoScript configuration
 		 * @return string Chart options
 		 */
-		protected function getChartOptions(array $configuration) {
+		protected function getChartOptions() {
 				// Get titles from first set of lines
 			$titles = '[]';
-			if (!empty($configuration['sets.']) && is_array($configuration['sets.'])) {
-				$firstSet = reset($configuration['sets.']);
+			if (!empty($this->sets) && is_array($this->sets)) {
+				$firstSet = reset($this->sets);
 				$titles = json_encode(array_keys($firstSet));
 			}
 
 			return sprintf(
 				$this->options,
-				$configuration['barWidth'],
+				$this->configuration['barWidth'],
 				$titles,
-				$configuration['gridLineColor'],
-				$configuration['backgroundColor'],
-				$configuration['borderColor'],
-				$configuration['borderWidth']
+				$this->configuration['gridLineColor'],
+				$this->configuration['backgroundColor'],
+				$this->configuration['borderColor'],
+				$this->configuration['borderWidth']
 			);
 		}
 
@@ -105,17 +104,16 @@
 		/**
 		 * Build the chart content
 		 *
-		 * @param array $configuration TypoScript configuration
 		 * @return string Chart content
 		 */
-		protected function getChartContent(array $configuration) {
-			if (empty($configuration['sets.']) || !is_array($configuration['sets.'])) {
+		protected function getChartContent() {
+			if (empty($this->sets) || !is_array($this->sets)) {
 				return array();
 			}
 
 				// Get all sets
 			$sets = array();
-			foreach ($configuration['sets.'] as $lines) {
+			foreach ($this->sets as $lines) {
 				$lines = array_reverse($lines, TRUE);
 				$sets[] = array_values($lines);
 			}

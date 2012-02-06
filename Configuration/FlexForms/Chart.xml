@@ -11,10 +11,10 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
-					<settings.chartType>
+					<settings.type>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:sp_charts/Resources/Private/Language/locallang.xml:tt_content.flexform_pi1.s_def.chartType</label>
+							<label>LLL:EXT:sp_charts/Resources/Private/Language/locallang.xml:tt_content.flexform_pi1.s_def.type</label>
 							<config>
 								<type>select</type>
 								<default>bar</default>
@@ -26,11 +26,11 @@
 								<noIconsBelowSelect>1</noIconsBelowSelect>
 							</config>
 						</TCEforms>
-					</settings.chartType>
-					<settings.chartSetup>
+					</settings.type>
+					<settings.flexformSets>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:sp_charts/Resources/Private/Language/locallang.xml:tt_content.flexform_pi1.s_def.chartSetup</label>
+							<label>LLL:EXT:sp_charts/Resources/Private/Language/locallang.xml:tt_content.flexform_pi1.s_def.sets</label>
 							<config>
 								<type>text</type>
 								<wrap>off</wrap>
@@ -39,7 +39,7 @@
 								<rows>10</rows>
 							</config>
 						</TCEforms>
-					</settings.chartSetup>
+					</settings.flexformSets>
 				</el>
 			</ROOT>
 		</sDEF>

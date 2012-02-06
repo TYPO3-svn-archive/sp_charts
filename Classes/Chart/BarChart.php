@@ -80,17 +80,16 @@
 		/**
 		 * Build the chart options
 		 *
-		 * @param array $configuration TypoScript configuration
 		 * @return string Chart options
 		 */
-		protected function getChartOptions(array $configuration) {
+		protected function getChartOptions() {
 			return sprintf(
 				$this->options,
-				$configuration['barWidth'],
-				$configuration['gridLineColor'],
-				$configuration['backgroundColor'],
-				$configuration['borderColor'],
-				$configuration['borderWidth']
+				$this->configuration['barWidth'],
+				$this->configuration['gridLineColor'],
+				$this->configuration['backgroundColor'],
+				$this->configuration['borderColor'],
+				$this->configuration['borderWidth']
 			);
 		}
 
@@ -98,17 +97,16 @@
 		/**
 		 * Build the chart content
 		 *
-		 * @param array $configuration TypoScript configuration
 		 * @return string Chart content
 		 */
-		protected function getChartContent(array $configuration) {
-			if (empty($configuration['sets.']) || !is_array($configuration['sets.'])) {
+		protected function getChartContent() {
+			if (empty($this->sets) || !is_array($this->sets)) {
 				return array();
 			}
 
 				// Get all sets
 			$sets = array();
-			foreach ($configuration['sets.'] as $lines) {
+			foreach ($this->sets as $lines) {
 				$lines = array_reverse($lines, TRUE);
 				$set = array();
 				foreach ($lines as $title => $value) {

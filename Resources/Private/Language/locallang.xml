@@ -13,8 +13,8 @@
 			<label index="mlang_labels_tabdescr">Chart</label>
 
 			<label index="tt_content.flexform_pi1.s_def">General</label>
-			<label index="tt_content.flexform_pi1.s_def.chartType">Chart type</label>
-			<label index="tt_content.flexform_pi1.s_def.chartSetup">Chart configuration</label>
+			<label index="tt_content.flexform_pi1.s_def.type">Chart type</label>
+			<label index="tt_content.flexform_pi1.s_def.sets">Sets of lines</label>
 
 			<label index="chart_bar">Bar</label>
 			<label index="chart_column">Column</label>
@@ -22,7 +22,7 @@
 			<label index="chart_line">Line</label>
 			<label index="chart_pie">Pie</label>
 
-			<label index="title">Charts demo</label>
+			<label index="title">Chart</label>
 			<label index="title_bar">Bar</label>
 			<label index="title_column">Column</label>
 			<label index="title_donut">Donut</label>
@@ -38,8 +38,8 @@
 			<label index="mlang_labels_tabdescr">Diagramm</label>
 
 			<label index="tt_content.flexform_pi1.s_def">Allgemein</label>
-			<label index="tt_content.flexform_pi1.s_def.chartType">Diagramm-Typ</label>
-			<label index="tt_content.flexform_pi1.s_def.chartSetup">Diagramm-Konfiguration</label>
+			<label index="tt_content.flexform_pi1.s_def.type">Diagramm-Typ</label>
+			<label index="tt_content.flexform_pi1.s_def.sets">Linien-Sätze</label>
 
 			<label index="chart_bar">Bar</label>
 			<label index="chart_column">Column</label>
@@ -47,7 +47,7 @@
 			<label index="chart_line">Line</label>
 			<label index="chart_pie">Pie</label>
 
-			<label index="title">Diagramm-Demo</label>
+			<label index="title">Diagramm</label>
 			<label index="title_bar">Bar</label>
 			<label index="title_column">Column</label>
 			<label index="title_donut">Donut</label>

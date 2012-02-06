@@ -74,6 +74,16 @@
 			if (!empty($this->settings) && is_array($this->settings)) {
 				$this->settings = Tx_SpCharts_Utility_TypoScript::parse($this->settings);
 			}
+
+				// Override default page renderer in chart service (singleton)
+			$chartService = $this->objectManager->get('Tx_SpCharts_Service_ChartService');
+			$chartService->setPageRenderer($this->pageRenderer);
+
+				// Set default styles
+			$setup = Tx_SpCharts_Utility_TypoScript::getSetupForPid($pageId, 'module.tx_spcharts');
+			if (!empty($setup['_CSS_DEFAULT_STYLE'])) {
+				$this->pageRenderer->addCssInlineBlock('spcharts', $setup['_CSS_DEFAULT_STYLE'], TRUE);
+			}
 		}
 
 
@@ -93,7 +103,27 @@
 		 * @return void
 		 */
 		public function showAction() {
-			$this->view->assign('data', $this->getData($this->settings));
+			$sets = $this->getSets();
+
+				// Get demo data if configuration is empty
+			if (empty($sets) && empty($this->settings['disableDemoSets'])) {
+				$sets = array(array(
+						'Firefox'           => 380,
+						'Internet Explorer' => 312,
+						'Google Chrome'     => 484,
+						'Safari'            => 284,
+						'Opera'             => 200,
+				),
+				array(
+						'Firefox'           => 456,
+						'Internet Explorer' => 485,
+						'Google Chrome'     => 375,
+						'Safari'            => 247,
+						'Opera'             => 178,
+				));
+			}
+
+			$this->view->assign('sets', $sets);
 			$this->view->assign('settings', $this->settings);
 		}
 

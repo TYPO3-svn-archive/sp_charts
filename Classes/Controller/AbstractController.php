@@ -29,55 +29,44 @@
 	class Tx_SpCharts_Controller_AbstractController extends Tx_Extbase_MVC_Controller_ActionController {
 
 		/**
-		 * Get configured data
+		 * Build array from TypoScript set configuration
 		 *
-		 * @param array $settings The TypoScript setup
-		 * @return array The data to show
+		 * @return array The sets
 		 */
-		protected function getConfiguredData(array $settings) {
-			$data = array();
+		protected function getSets() {
+			if (empty($this->settings['sets']) || !is_array($this->settings['sets'])) {
+				return array();
+			}
 
-			if (!empty($settings['chartSetup']) && is_array($settings['chartSetup'])) {
-				foreach($settings['chartSetup'] as $set) {
-					if (!is_array($set)) {
-						throw new Exception('Chart setup is not well-formed');
-					}
-					$bars = array();
-					foreach ($set as $bar) {
-						if (!isset($bar['title'], $bar['value'])) {
-							throw new Exception('Chart setup for one bar is not well-formed');
-						}
-						$bars[] = array($bar['title'], $bar['value']);
-					}
-					$data[] = $bars;
+			$sets = array();
+			$separator = (!empty($this->settings['separator']) ? $this->settings['separator'] : ';');
+			$equalSign = (!empty($this->settings['equalSign']) ? $this->settings['equalSign'] : '=');
+
+				// Get sets
+			foreach ($this->settings['sets'] as $name => $set) {
+				if (empty($set)) {
+					continue;
 				}
+
+					// Build lines
+				$lines = array();
+				$set = t3lib_div::trimExplode($separator, $set);
+				foreach ($set as $line) {
+					$line = t3lib_div::trimExplode($equalSign, $line);
+					if (empty($line) || count($line) !== 2) {
+						continue;
+					}
+					if (!isset($line[0])) {
+						$lines[$line[0]] = $line[1];
+					} else {
+						$lines[$line[0]] += $line[1];
+					}
+				}
+
+				$sets[$name] = $lines;
 			}
 
-			return $data;
-		}
-
-
-		/**
-		 * Get all data to show in charts
-		 *
-		 * @param array $settings The TypoScript setup
-		 * @return array The data to show
-		 */
-		protected function getData(array $settings) {
-			$data = $this->getConfiguredData($settings);
-
-				// Get demo data if configuration is empty
-			if (empty($data) && empty($settings['hideDemoData'])) {
-				$data = array(array(
-					array('Firefox',           380),
-					array('Internet Explorer', 312),
-					array('Google Chrome',     484),
-					array('Safari',            284),
-					array('Opera',             200),
-				));
-			}
-
-			return $data;
+			return $sets;
 		}
 
 	}

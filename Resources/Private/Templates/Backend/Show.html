@@ -7,38 +7,38 @@
 	<h2><f:translate key="title" /></h2>
 	<div style="padding-top: 5px;"></div>
 
-	<f:if condition="{settings.chartType}">
+	<f:if condition="{settings.type}">
 		<f:then>
 
-			<h3 class="uppercase"><charts:spriteIcon name="spcharts-{settings.chartType}" />&nbsp;<f:translate key="title_{settings.chartType}" /></h3>
-			<charts:chart type="{settings.chartType}">{data}</charts:chart>
+			<h3 class="uppercase"><charts:spriteIcon name="spcharts-{settings.type}" />&nbsp;<f:translate key="title_{settings.type}" /></h3>
+			<charts:chart type="{settings.type}" configuration="{settings}">{sets}</charts:chart>
 			<br class="clear" />
 
 		</f:then>
 		<f:else>
 
 			<h3 class="uppercase"><charts:spriteIcon name="spcharts-bar" />&nbsp;<f:translate key="title_bar" /></h3>
-			<charts:chart type="bar">{data}</charts:chart>
+			<charts:chart type="bar" configuration="{settings}">{sets}</charts:chart>
 			<br class="clear" />
 
 			<div style="padding-top: 24px;"></div>
 			<h3 class="uppercase"><charts:spriteIcon name="spcharts-column" />&nbsp;<f:translate key="title_column" /></h3>
-			<charts:chart type="column">{data}</charts:chart>
+			<charts:chart type="column" configuration="{settings}">{sets}</charts:chart>
 			<br class="clear" />
 
 			<div style="padding-top: 24px;"></div>
 			<h3 class="uppercase"><charts:spriteIcon name="spcharts-donut" />&nbsp;<f:translate key="title_donut" /></h3>
-			<charts:chart type="donut">{data}</charts:chart>
+			<charts:chart type="donut" configuration="{settings}">{sets}</charts:chart>
 			<br class="clear" />
 
 			<div style="padding-top: 24px;"></div>
 			<h3 class="uppercase"><charts:spriteIcon name="spcharts-line" />&nbsp;<f:translate key="title_line" /></h3>
-			<charts:chart type="line">{data}</charts:chart>
+			<charts:chart type="line" configuration="{settings}">{sets}</charts:chart>
 			<br class="clear" />
 
 			<div style="padding-top: 24px;"></div>
 			<h3 class="uppercase"><charts:spriteIcon name="spcharts-pie" />&nbsp;<f:translate key="title_pie" /></h3>
-			<charts:chart type="pie">{data}</charts:chart>
+			<charts:chart type="pie" configuration="{settings}">{sets}</charts:chart>
 			<br class="clear" />
 
 		</f:else>

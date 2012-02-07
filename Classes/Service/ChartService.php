@@ -97,7 +97,7 @@
 			}
 
 				// Get page renderer
-			if (!empty($GLOBALS['TSFE']) && $GLOBALS['TSFE'] instanceof tslib_fe) {
+			if (!empty($GLOBALS['TSFE']) && get_class($GLOBALS['TSFE']) === 'tslib_fe') {
 				$this->pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
 			} else if (class_exists('t3lib_PageRenderer')) {
 				$this->pageRenderer = t3lib_div::makeInstance('t3lib_PageRenderer');

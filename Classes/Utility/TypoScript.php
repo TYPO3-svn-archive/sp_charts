@@ -65,7 +65,7 @@
 			self::$configurationManager = self::$objectManager->get('Tx_Extbase_Configuration_ConfigurationManager');
 
 				// Simulate Frontend
-			if (TYPO3_MODE != 'FE') {
+			if (TYPO3_MODE != 'FE' || empty($GLOBALS['TSFE'])) {
 				self::simulateFrontend();
 				self::$configurationManager->setContentObject($GLOBALS['TSFE']->cObj);
 			}

@@ -42,6 +42,10 @@
 				$this->settings['sets'] = Tx_SpCharts_Utility_TypoScript::parseTypoScriptString($this->settings['flexformSets']);
 				unset($this->settings['flexformSets']);
 			}
+
+				// Override default attributes in chart service (singleton)
+			$chartService = $this->objectManager->get('Tx_SpCharts_Service_ChartService');
+			$chartService->setConfiguration($this->settings);
 		}
 
 

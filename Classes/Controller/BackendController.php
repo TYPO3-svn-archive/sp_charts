@@ -78,6 +78,7 @@
 				// Override default page renderer in chart service (singleton)
 			$chartService = $this->objectManager->get('Tx_SpCharts_Service_ChartService');
 			$chartService->setPageRenderer($this->pageRenderer);
+			$chartService->setConfiguration($this->settings);
 
 				// Set default styles
 			$setup = Tx_SpCharts_Utility_TypoScript::getSetupForPid($pageId, 'module.tx_spcharts');

@@ -51,9 +51,12 @@
 		 * @param array $configuration Configuration for the chart renderer
 		 * @return string The rendered chart
 		 */
-		public function render($sets = NULL, $type = 'bar', array $configuration = array()) {
+		public function render($sets = NULL, $type = 'bar', $configuration = array()) {
 			if ($sets === NULL) {
 				$sets = $this->renderChildren();
+			}
+			if (!is_array($configuration)) {
+				$configuration = array();
 			}
 			return $this->chartService->renderChart($sets, $type, $configuration);
 		}

@@ -123,7 +123,9 @@
 		 * @return void
 		 */
 		public function setConfiguration(array $configuration) {
-			$this->configuration = $configuration;
+			if (!empty($configuration)) {
+				$this->configuration = $configuration;
+			}
 		}
 
 

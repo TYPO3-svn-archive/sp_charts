@@ -73,6 +73,8 @@
 				// Pre-parse TypoScript setup
 			if (!empty($this->settings) && is_array($this->settings)) {
 				$this->settings = Tx_SpCharts_Utility_TypoScript::parse($this->settings);
+			} else {
+				$this->settings = array();
 			}
 
 				// Override default attributes in chart service (singleton)

@@ -68,7 +68,9 @@
 
 
 		// Add sprite icons
-	$icons = require(t3lib_extMgm::extPath($_EXTKEY)  . 'ext_icons.php');
-	t3lib_SpriteManager::addSingleIcons($icons, str_replace('_', '', $_EXTKEY));
+	$iconFile = t3lib_extMgm::extPath($_EXTKEY)  . 'ext_icons.php';
+	if (file_exists($iconFile)) {
+		t3lib_SpriteManager::addSingleIcons(require($iconFile), str_replace('_', '', $_EXTKEY));
+	}
 
 ?>

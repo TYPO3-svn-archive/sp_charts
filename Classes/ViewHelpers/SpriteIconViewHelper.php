@@ -31,6 +31,10 @@
 		/**
 		 * Renders a sprite icon
 		 *
+		 * Notice: Name must be something like "myextname-image" for an
+		 *         extension named "my_ext_name" and an image named "image".
+		 *         To add images use "t3lib_SpriteManager::addSingleIcons"
+		 *
 		 * @param string $name The name of the sprite icon
 		 * @param string $prefix An optional prefix
 		 * @return string The rendered icon

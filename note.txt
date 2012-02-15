@@ -1,0 +1,3 @@
+- Wie oft / wann war jemand angemeldet (sys_log)
+- In welcher Woche / Monat/ Jahr wurden wieviel Seiten angelegt
+- Als Demo-Modul in sp_charts

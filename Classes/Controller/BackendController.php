@@ -106,28 +106,44 @@
 		 * @return void
 		 */
 		public function showAction() {
-			$sets = $this->getSets();
-
-				// Get demo data if configuration is empty
-			if (empty($sets) && empty($this->settings['disableDemoSets'])) {
-				$sets = array(array(
-						'Firefox'           => 380,
-						'Internet Explorer' => 312,
-						'Google Chrome'     => 484,
-						'Safari'            => 284,
-						'Opera'             => 200,
-				),
-				array(
-						'Firefox'           => 456,
-						'Internet Explorer' => 485,
-						'Google Chrome'     => 375,
-						'Safari'            => 247,
-						'Opera'             => 178,
-				));
-			}
-
-			$this->view->assign('sets', $sets);
+			$this->view->assign('sets', $this->getSets());
+			$this->view->assign('pagesByDate', $this->getPagesByDate());
+			$this->view->assign('pagesByUsers', $this->getPagesByUsers());
+			$this->view->assign('loginsByDate', $this->getLoginsByDate());
 			$this->view->assign('settings', $this->settings);
+		}
+
+
+		/**
+		 * Returns a list of users and the count of their created pages
+		 * 
+		 * @return array Users / page count
+		 */
+		protected function getPagesByDate() {
+			// SELECT SUBSTRING(FROM_UNIXTIME(crdate), 1, 7) as date, COUNT(1) as count FROM pages WHERE 1 GROUP BY date ORDER BY date
+			return array();
+		}
+
+
+		/**
+		 * Returns a list of users and the count of their created pages
+		 * 
+		 * @return array Users / page count
+		 */
+		protected function getPagesByUsers() {
+			// SELECT username, COUNT(pages.uid) as count FROM be_users INNER JOIN pages ON ( be_users.uid = pages.cruser_id) WHERE 1 GROUP BY be_users.uid ORDER BY username
+			return array();
+		}
+
+
+		/**
+		 * Returns a list of users and the count of their created pages
+		 * 
+		 * @return array Users / page count
+		 */
+		protected function getLoginsByDate() {
+			// sys_log.cruser_id, sys_log.type = 255
+			return array();
 		}
 
 	}
